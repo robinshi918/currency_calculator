@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height"
+        android:layout_marginTop="90dp">
+        <EditText
+            android:id="@+id/upper_currency_value"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:text="0.0"
+            android:gravity="center"
+            android:textSize="@dimen/currency_text_size"/>
+        <ImageButton
+            android:id="@+id/upper_change_currency_button"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="@dimen/currency_left_margin"
+            />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_exchange"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height"
+        android:text="EXCHANGE"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height">
+        <EditText
+            android:id="@+id/lower_currency_value"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:text="0.0"
+            android:gravity="center"
+            android:textSize="@dimen/currency_text_size"/>
+        <ImageButton
+            android:id="@+id/lower_change_currency_button"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="@dimen/currency_left_margin"
+            />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
