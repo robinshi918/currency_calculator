@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Convert;
+
+import java.util.List;
+
 public class CalculatorActivity extends AppCompatActivity {
 
     private static final String TAG = CalculatorActivity.class.getSimpleName();
 
-    Button exchangeButton;
+    Button swapButton;
     ImageButton upperButton;
     EditText upperEdit;
     ImageButton lowerButton;
@@ -34,6 +38,53 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     };
 
+    static int i = 0;
+    View.OnClickListener swapButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            getList();
+        }
+    };
+
+    private void convert() {
+        BaiDuApi.getInstance().convert(100.0f, "USD", "CNY", new BaiDuApi.Listener<Convert>() {
+            @Override
+            public void onResponse(final Convert result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (result != null) {
+                            String value = String.format("%.4f", result.getRetData().getConvertedamount());
+                            upperEdit.setText(value);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
+    private void getList() {
+        BaiDuApi.getInstance().getCurrencyList(new BaiDuApi.Listener<List<String>>() {
+            @Override
+            public void onResponse(List<String> result) {
+
+                for (String currency: result) {
+                    Log.d(TAG, currency);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +95,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private void findViews() {
         //init widgets
-        exchangeButton = (Button) findViewById(R.id.button_exchange);
+        swapButton = (Button) findViewById(R.id.button_exchange);
         upperButton = (ImageButton) findViewById(R.id.upper_change_currency_button);
         upperEdit = (EditText) findViewById(R.id.upper_currency_value);
         lowerButton = (ImageButton) findViewById(R.id.lower_change_currency_button);
@@ -53,6 +104,7 @@ public class CalculatorActivity extends AppCompatActivity {
         // init listeners
         lowerButton.setOnClickListener(lowerChangeCurrencyListener);
         upperButton.setOnClickListener(upperChangeCurrencyListener);
+        swapButton.setOnClickListener(swapButtonListener);
 
         lowerEdit.setOnClickListener(new View.OnClickListener() {
             @Override
