@@ -3,7 +3,6 @@ package com.example.shiyun.myapplication;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Convert;
@@ -173,10 +172,5 @@ public class BaiDuApi {
                 }
             }
         }).start();
-
-//        ArrayAdapter<String> arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
-        Spinner sp;
-
-
     }
 }
