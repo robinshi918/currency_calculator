@@ -42,6 +42,20 @@ public class RatesManager {
 
     public List<String> getCurrencyList() {
         List<String> list = new ArrayList<>();
+        String[] freqList = {"CNY",
+                "JPY",
+                "GBP",
+                "CHF",
+                "CAD",
+                "HKD",
+                "IEP",
+                "LUF",
+                "PTE",
+                "IDR",
+                "NZD",
+                "SUR",
+                "KRW"
+        };
 
         return list;
     }

@@ -290,6 +290,7 @@ public class CalculatorActivity extends AppCompatActivity {
         if (lowerPos != -1) {
             lowerSpinner.setSelection(lowerPos);
         }
-    }
 
+
+    }
 }
