@@ -17,20 +17,19 @@
             android:text="0.0"
             android:gravity="center"
             android:textSize="@dimen/currency_text_size"/>
-        <ImageButton
-            android:id="@+id/upper_change_currency_button"
+        <Spinner
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="@dimen/currency_left_margin"
-            />
+            android:id="@+id/upper_spinner"/>
     </RelativeLayout>
 
     <Button
         android:id="@+id/button_exchange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_height"
-        android:text="EXCHANGE"/>
+        android:text="CONVERT"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,14 +42,23 @@
             android:text="0.0"
             android:gravity="center"
             android:textSize="@dimen/currency_text_size"/>
-        <ImageButton
-            android:id="@+id/lower_change_currency_button"
+        <Spinner
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="@dimen/currency_left_margin"
+            android:id="@+id/lower_spinner"/>
             />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tipText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="2016-06-01 20:12:34"/>
+
+
 
 
 

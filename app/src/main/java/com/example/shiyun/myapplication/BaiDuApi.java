@@ -3,22 +3,19 @@ package com.example.shiyun.myapplication;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Convert;
 import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,37 +69,11 @@ public class BaiDuApi {
                 } else {
                     listener.onError(new Exception("getCurrencyTypeList() 服务端返回数据解析失败" + text));
                 }
-
-
-                /*if (!TextUtils.isEmpty(result)) {
-                    try {
-                        JSONObject jsonObj = new JSONObject(result);
-                        int errNum = jsonObj.getInt("errNum");
-                        String errMsg = jsonObj.getString("errMsg");
-                        JSONArray data = jsonObj.getJSONArray("retData");
-                        Log.d(TAG, "errNum = " + errNum + ", errMsg = " + errMsg + "\nretData = " + data);
-                        if (data != null && data.length() > 0) {
-                            for (int i = 0; i < data.length(); i++) {
-                                String value = (String) data.get(i);
-                                if (!TextUtils.isEmpty(value)) {
-                                    list.add(value);
-                                }
-                            }
-                            listener.onResponse(list);
-                        } else {
-                            listener.onError(new Exception("getCurrencyList() server returns empty currency list."));
-                        }
-                    } catch (JSONException e) {
-                        Log.e(TAG, "getCurrencyList failed - " + e.toString());
-                        listener.onError(e);
-                    }
-                } else {
-                    listener.onError(new Exception("server returned empty data"));
-                }*/
             }
 
             @Override
             public void onError(Exception e) {
+                e.printStackTrace();
                 listener.onError(e);
             }
         });
@@ -131,9 +102,13 @@ public class BaiDuApi {
                     Convert result = gson.fromJson(data, new TypeToken<Convert>() {
                     }.getType());
 
+                    Log.i(TAG, result.toString());
+
                     if (result != null) {
                         listener.onResponse(result);
                     }
+                } else {
+                    listener.onError(new Exception("server returned empty data!"));
                 }
             }
 
@@ -142,14 +117,13 @@ public class BaiDuApi {
                 listener.onError(e);
             }
         });
-
     }
 
     private static final int INVALID_CODE = 0xDEADBEEF;
 
+    //TODO
     public String getTimestamp() {
         if (updateTime != null) {
-            updateTime.toLocaleString();
             return DateFormat.format("", updateTime).toString(); // FIXME TODO
         }
         return "";
@@ -157,6 +131,7 @@ public class BaiDuApi {
 
     private Date updateTime;
 
+    // TODO
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -198,5 +173,10 @@ public class BaiDuApi {
                 }
             }
         }).start();
+
+//        ArrayAdapter<String> arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
+        Spinner sp;
+
+
     }
 }

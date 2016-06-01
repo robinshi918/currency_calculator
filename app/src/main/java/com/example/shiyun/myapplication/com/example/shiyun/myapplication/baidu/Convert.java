@@ -20,4 +20,13 @@ public class Convert {
     public ConvertRetData getRetData() {
         return retData;
     }
+
+    @Override
+    public String toString() {
+        return "Convert{" +
+                "errNum=" + errNum +
+                ", errMsg='" + errMsg + '\'' +
+                ", retData=" + retData +
+                '}';
+    }
 }
