@@ -1,12 +1,11 @@
-package com.example.shiyun.myapplication;
+package org.robinshi;
 
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.widget.Spinner;
 
-import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Convert;
-import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Type;
+import org.robinshi.baidu.Convert;
+import org.robinshi.baidu.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

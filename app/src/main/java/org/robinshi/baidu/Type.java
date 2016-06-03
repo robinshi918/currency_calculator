@@ -1,4 +1,4 @@
-package com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu;
+package org.robinshi.baidu;
 
 import java.io.Serializable;
 import java.util.List;

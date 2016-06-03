@@ -1,4 +1,4 @@
-package com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu;
+package org.robinshi.baidu;
 
 /**
  * convert result of BaiduApi

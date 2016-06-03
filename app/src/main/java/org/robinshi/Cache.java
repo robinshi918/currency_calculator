@@ -1,4 +1,4 @@
-package com.example.shiyun.myapplication;
+package org.robinshi;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -64,18 +64,15 @@ public class Cache {
     }
 
     public void putString(@NonNull String key, String content) {
-        mFile.edit().putString(key, content);
-        mFile.edit().apply();
+        mFile.edit().putString(key, content).commit();
     }
 
     public void putFloat(@NonNull String key, float value) {
-        mFile.edit().putFloat(key, value);
-        mFile.edit().apply();
+        mFile.edit().putFloat(key, value).commit();
     }
 
     public void putInt(@NonNull String key, int value) {
-        mFile.edit().putInt(key, value);
-        mFile.edit().apply();
+        mFile.edit().putInt(key, value).commit();
     }
 
     public void putJSONObject(@NonNull String key, JSONObject value) {
@@ -84,6 +81,5 @@ public class Cache {
         } else {
             putString(key, null);
         }
-        mFile.edit().apply();
     }
 }

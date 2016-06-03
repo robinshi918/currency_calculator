@@ -1,6 +1,4 @@
-package com.example.shiyun.myapplication;
-
-import java.util.Map;
+package org.robinshi;
 
 /**
  * Map currency ISO code to its Chinese Name and English Name

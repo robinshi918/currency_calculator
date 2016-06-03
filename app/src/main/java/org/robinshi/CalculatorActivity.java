@@ -1,4 +1,4 @@
-package com.example.shiyun.myapplication;
+package org.robinshi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shiyun.myapplication.com.example.shiyun.myapplication.baidu.Convert;
+import com.example.shiyun.myapplication.R;
+import org.robinshi.baidu.Convert;
 
 import java.util.List;
 
