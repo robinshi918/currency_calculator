@@ -9,33 +9,25 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.concurrent.ExecutorService;
-
 /**
  * Created by shiyun on 16/6/2.
  */
-public class Cache {
-    private static final String TAG = Cache.class.getSimpleName();
+public class CacheManager {
+    private static final String TAG = CacheManager.class.getSimpleName();
 
-    private Context mContext;
+    public static String KEY_CURRENCY_LIST = "currency_list";
 
-    private static Cache mInstance;
+    private static CacheManager mInstance;
     private SharedPreferences mFile;
 
-    private Cache(@NonNull Context context) {
-        mContext = context;
-        mFile = mContext.getSharedPreferences("cache_file", Context.MODE_PRIVATE);
+    private CacheManager() {
+        mFile = CCApplication.getAppInstance().getSharedPreferences("cache_file", Context.MODE_PRIVATE);
     }
 
-    public static synchronized Cache getInstance(Context context) {
-        if (context == null) {
-            throw new IllegalArgumentException("parameter is null");
-        }
-
+    public static synchronized CacheManager getInstance() {
         if (mInstance == null) {
-            mInstance = new Cache(context);
+            mInstance = new CacheManager();
         }
-
         return mInstance;
     }
 
@@ -66,15 +58,15 @@ public class Cache {
     }
 
     public void putString(@NonNull String key, String content) {
-        mFile.edit().putString(key, content).commit();
+        mFile.edit().putString(key, content).apply();
     }
 
     public void putFloat(@NonNull String key, float value) {
-        mFile.edit().putFloat(key, value).commit();
+        mFile.edit().putFloat(key, value).apply();
     }
 
     public void putInt(@NonNull String key, int value) {
-        mFile.edit().putInt(key, value).commit();
+        mFile.edit().putInt(key, value).apply();
     }
 
     public void putJSONObject(@NonNull String key, JSONObject value) {
@@ -84,4 +76,5 @@ public class Cache {
             putString(key, null);
         }
     }
+
 }

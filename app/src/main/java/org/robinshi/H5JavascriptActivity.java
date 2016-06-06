@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.shiyun.myapplication.R;
+import org.robinshi.R;
 
 import java.io.IOException;
 

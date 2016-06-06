@@ -1,9 +1,11 @@
-package org.robinshi.baidu;
+package org.robinshi.baidu.domain;
+
+import org.robinshi.baidu.ConvertRetData;
 
 /**
  * convert result of BaiduApi
  */
-public class Convert {
+public class ConvertResult extends CacheItem{
 
     public int errNum;
     public String errMsg;
@@ -23,10 +25,15 @@ public class Convert {
 
     @Override
     public String toString() {
-        return "Convert{" +
+        return "ConvertResult{" +
                 "errNum=" + errNum +
                 ", errMsg='" + errMsg + '\'' +
                 ", retData=" + retData +
                 '}';
+    }
+
+    @Override
+    public boolean hasExpire() {
+        return true;
     }
 }

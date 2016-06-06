@@ -1,0 +1,1070 @@
+[
+    {
+        "alphabeticCode": "FJD",
+        "numericCode": "242",
+        "enName": "Fiji dollar",
+        "cnName": "斐济元"
+    },
+    {
+        "alphabeticCode": "MXN",
+        "numericCode": "484",
+        "enName": "Mexican peso",
+        "cnName": "墨西哥比索"
+    },
+    {
+        "alphabeticCode": "STD",
+        "numericCode": "678",
+        "enName": "São Tomé and Príncipe dobra",
+        "cnName": "圣多美和普林西比多布拉"
+    },
+    {
+        "alphabeticCode": "SCR",
+        "numericCode": "690",
+        "enName": "Seychelles rupee",
+        "cnName": "塞舌尔卢比"
+    },
+    {
+        "alphabeticCode": "CDF",
+        "numericCode": "976",
+        "enName": "Congolese franc",
+        "cnName": "刚果法郎"
+    },
+    {
+        "alphabeticCode": "BBD",
+        "numericCode": "052",
+        "enName": "Barbados dollar",
+        "cnName": "巴巴多斯元"
+    },
+    {
+        "alphabeticCode": "GTQ",
+        "numericCode": "320",
+        "enName": "Guatemalan quetzal",
+        "cnName": "危地马拉格查尔"
+    },
+    {
+        "alphabeticCode": "CLP",
+        "numericCode": "152",
+        "enName": "Chilean peso",
+        "cnName": "智利比索"
+    },
+    {
+        "alphabeticCode": "HNL",
+        "numericCode": "340",
+        "enName": "Honduran lempira",
+        "cnName": "洪都拉斯伦皮拉"
+    },
+    {
+        "alphabeticCode": "UGX",
+        "numericCode": "800",
+        "enName": "Ugandan shilling",
+        "cnName": "乌干达先令"
+    },
+    {
+        "alphabeticCode": "MXV",
+        "numericCode": "979",
+        "enName": "Mexican Unidad de Inversion (UDI) (funds code)",
+        "cnName": "墨西哥发展单位（UDI，资金代码）"
+    },
+    {
+        "alphabeticCode": "ZAR",
+        "numericCode": "710",
+        "enName": "South African rand",
+        "cnName": "南非兰特"
+    },
+    {
+        "alphabeticCode": "TND",
+        "numericCode": "788",
+        "enName": "Tunisian dinar",
+        "cnName": "突尼斯第纳尔"
+    },
+    {
+        "alphabeticCode": "CUC",
+        "numericCode": "931",
+        "enName": "Cuban convertible peso",
+        "cnName": "古巴可兑换比索"
+    },
+    {
+        "alphabeticCode": "BSD",
+        "numericCode": "044",
+        "enName": "Bahamian dollar",
+        "cnName": "巴哈马元"
+    },
+    {
+        "alphabeticCode": "SLL",
+        "numericCode": "694",
+        "enName": "Sierra Leonean leone",
+        "cnName": "塞拉利昂利昂"
+    },
+    {
+        "alphabeticCode": "SDG",
+        "numericCode": "938",
+        "enName": "Sudanese pound",
+        "cnName": "苏丹镑"
+    },
+    {
+        "alphabeticCode": "IQD",
+        "numericCode": "368",
+        "enName": "Iraqi dinar",
+        "cnName": "伊拉克第纳尔"
+    },
+    {
+        "alphabeticCode": "CUP",
+        "numericCode": "192",
+        "enName": "Cuban peso",
+        "cnName": "古巴比索"
+    },
+    {
+        "alphabeticCode": "GMD",
+        "numericCode": "270",
+        "enName": "Gambian dalasi",
+        "cnName": "冈比亚达拉西"
+    },
+    {
+        "alphabeticCode": "TWD",
+        "numericCode": "901",
+        "enName": "New Taiwan dollar",
+        "cnName": "新台币元"
+    },
+    {
+        "alphabeticCode": "RSD",
+        "numericCode": "941",
+        "enName": "Serbian dinar",
+        "cnName": "塞尔维亚第纳尔"
+    },
+    {
+        "alphabeticCode": "DOP",
+        "numericCode": "214",
+        "enName": "Dominican peso",
+        "cnName": "多米尼加比索"
+    },
+    {
+        "alphabeticCode": "UYI",
+        "numericCode": "940",
+        "enName": "Uruguay Peso en Unidades Indexadas (URUIURUI) (funds code)",
+        "cnName": "乌拉圭比索资金索引（URUIURUI，资金代码）"
+    },
+    {
+        "alphabeticCode": "KMF",
+        "numericCode": "174",
+        "enName": "Comoro franc",
+        "cnName": "科摩罗法郎"
+    },
+    {
+        "alphabeticCode": "XFU",
+        "numericCode": "Nil",
+        "enName": "UIC franc (special settlement currency)",
+        "cnName": "UIC法郎（特别结算货币）"
+    },
+    {
+        "alphabeticCode": "MYR",
+        "numericCode": "458",
+        "enName": "Malaysian ringgit",
+        "cnName": "马来西亚令吉"
+    },
+    {
+        "alphabeticCode": "FKP",
+        "numericCode": "238",
+        "enName": "Falkland Islands pound",
+        "cnName": "福克兰群岛镑"
+    },
+    {
+        "alphabeticCode": "XOF",
+        "numericCode": "952",
+        "enName": "CFA franc BCEAO",
+        "cnName": "西非法郎"
+    },
+    {
+        "alphabeticCode": "GEL",
+        "numericCode": "981",
+        "enName": "Georgian lari",
+        "cnName": "格鲁吉亚拉里"
+    },
+    {
+        "alphabeticCode": "UYU",
+        "numericCode": "858",
+        "enName": "Uruguayan peso",
+        "cnName": "乌拉圭比索"
+    },
+    {
+        "alphabeticCode": "MAD",
+        "numericCode": "504",
+        "enName": "Moroccan dirham",
+        "cnName": "摩洛哥迪尔汗"
+    },
+    {
+        "alphabeticCode": "CVE",
+        "numericCode": "132",
+        "enName": "Cape Verde escudo",
+        "cnName": "佛得角埃斯库多"
+    },
+    {
+        "alphabeticCode": "TOP",
+        "numericCode": "776",
+        "enName": "Tongan paʻanga",
+        "cnName": "汤加潘加"
+    },
+    {
+        "alphabeticCode": "OMR",
+        "numericCode": "512",
+        "enName": "Omani rial",
+        "cnName": "阿曼里亚尔"
+    },
+    {
+        "alphabeticCode": "AZN",
+        "numericCode": "944",
+        "enName": "Azerbaijani manat",
+        "cnName": "阿塞拜疆马纳特"
+    },
+    {
+        "alphabeticCode": "PGK",
+        "numericCode": "598",
+        "enName": "Papua New Guinean kina",
+        "cnName": "巴布亚新几内亚基那"
+    },
+    {
+        "alphabeticCode": "KES",
+        "numericCode": "404",
+        "enName": "Kenyan shilling",
+        "cnName": "肯尼亚先令"
+    },
+    {
+        "alphabeticCode": "SEK",
+        "numericCode": "752",
+        "enName": "Swedish krona/kronor",
+        "cnName": "瑞典克朗"
+    },
+    {
+        "alphabeticCode": "UAH",
+        "numericCode": "980",
+        "enName": "Ukrainian hryvnia",
+        "cnName": "乌克兰格里夫纳"
+    },
+    {
+        "alphabeticCode": "BTN",
+        "numericCode": "064",
+        "enName": "Bhutanese ngultrum",
+        "cnName": "不丹努尔特鲁姆"
+    },
+    {
+        "alphabeticCode": "GNF",
+        "numericCode": "324",
+        "enName": "Guinean franc",
+        "cnName": "几内亚法郎"
+    },
+    {
+        "alphabeticCode": "MZN",
+        "numericCode": "943",
+        "enName": "Mozambican metical",
+        "cnName": "莫桑比克梅蒂卡尔"
+    },
+    {
+        "alphabeticCode": "ERN",
+        "numericCode": "232",
+        "enName": "Eritrean nakfa",
+        "cnName": "厄立特里亚纳克法"
+    },
+    {
+        "alphabeticCode": "ARS",
+        "numericCode": "032",
+        "enName": "Argentine peso",
+        "cnName": "阿根廷比索"
+    },
+    {
+        "alphabeticCode": "QAR",
+        "numericCode": "634",
+        "enName": "Qatari riyal",
+        "cnName": "卡塔尔里亚尔"
+    },
+    {
+        "alphabeticCode": "IRR",
+        "numericCode": "364",
+        "enName": "Iranian rial",
+        "cnName": "伊朗里亚尔"
+    },
+    {
+        "alphabeticCode": "MRO",
+        "numericCode": "478",
+        "enName": "Mauritanian ouguiya",
+        "cnName": "毛里塔尼亚乌吉亚"
+    },
+    {
+        "alphabeticCode": "XPD",
+        "numericCode": "964",
+        "enName": "Palladium (one troy ounce)",
+        "cnName": "钯（1金衡盎司）"
+    },
+    {
+        "alphabeticCode": "THB",
+        "numericCode": "764",
+        "enName": "Thai baht",
+        "cnName": "泰铢"
+    },
+    {
+        "alphabeticCode": "XPF",
+        "numericCode": "953",
+        "enName": "CFP franc (franc Pacifique)",
+        "cnName": "太平洋法郎（franc Pacifique）"
+    },
+    {
+        "alphabeticCode": "UZS",
+        "numericCode": "860",
+        "enName": "Uzbekistan som",
+        "cnName": "乌兹别克斯坦索姆"
+    },
+    {
+        "alphabeticCode": "CNY",
+        "numericCode": "156",
+        "enName": "Chinese yuan",
+        "cnName": "人民币元"
+    },
+    {
+        "alphabeticCode": "BDT",
+        "numericCode": "050",
+        "enName": "Bangladeshi taka",
+        "cnName": "孟加拉塔卡"
+    },
+    {
+        "alphabeticCode": "LYD",
+        "numericCode": "434",
+        "enName": "Libyan dinar",
+        "cnName": "利比亚第纳尔"
+    },
+    {
+        "alphabeticCode": "BMD",
+        "numericCode": "060",
+        "enName": "Bermudian dollar",
+        "cnName": "百慕大元"
+    },
+    {
+        "alphabeticCode": "PHP",
+        "numericCode": "608",
+        "enName": "Philippine peso",
+        "cnName": "菲律宾披索"
+    },
+    {
+        "alphabeticCode": "KWD",
+        "numericCode": "414",
+        "enName": "Kuwaiti dinar",
+        "cnName": "科威特第纳尔"
+    },
+    {
+        "alphabeticCode": "XXX",
+        "numericCode": "999",
+        "enName": "No currency",
+        "cnName": "没有货币的交换"
+    },
+    {
+        "alphabeticCode": "XPT",
+        "numericCode": "962",
+        "enName": "Platinum (one troy ounce)",
+        "cnName": "铂（1金衡盎司）"
+    },
+    {
+        "alphabeticCode": "RUB",
+        "numericCode": "643",
+        "enName": "Russian ruble",
+        "cnName": "俄罗斯卢布"
+    },
+    {
+        "alphabeticCode": "PYG",
+        "numericCode": "600",
+        "enName": "Paraguayan guaraní",
+        "cnName": "巴拉圭瓜拉尼"
+    },
+    {
+        "alphabeticCode": "JMD",
+        "numericCode": "388",
+        "enName": "Jamaican dollar",
+        "cnName": "牙买加元"
+    },
+    {
+        "alphabeticCode": "ISK",
+        "numericCode": "352",
+        "enName": "Icelandic króna",
+        "cnName": "冰岛克朗"
+    },
+    {
+        "alphabeticCode": "COP",
+        "numericCode": "170",
+        "enName": "Colombian peso",
+        "cnName": "哥伦比亚比索"
+    },
+    {
+        "alphabeticCode": "MKD",
+        "numericCode": "807",
+        "enName": "Macedonian denar",
+        "cnName": "马其顿代纳尔"
+    },
+    {
+        "alphabeticCode": "USD",
+        "numericCode": "840",
+        "enName": "United States dollar",
+        "cnName": "美元"
+    },
+    {
+        "alphabeticCode": "COU",
+        "numericCode": "970",
+        "enName": "Unidad de Valor Real (UVR) (funds code)[7]",
+        "cnName": "哥伦比亚实际单位（UVR，资金代码）[6]"
+    },
+    {
+        "alphabeticCode": "DZD",
+        "numericCode": "012",
+        "enName": "Algerian dinar",
+        "cnName": "阿尔及利亚第纳尔"
+    },
+    {
+        "alphabeticCode": "PAB",
+        "numericCode": "590",
+        "enName": "Panamanian balboa",
+        "cnName": "巴拿马巴波亚"
+    },
+    {
+        "alphabeticCode": "USN",
+        "numericCode": "997",
+        "enName": "United States dollar (next day) (funds code)",
+        "cnName": "美元（次日，资金代码）"
+    },
+    {
+        "alphabeticCode": "SGD",
+        "numericCode": "702",
+        "enName": "Singapore dollar",
+        "cnName": "新加坡元"
+    },
+    {
+        "alphabeticCode": "ETB",
+        "numericCode": "230",
+        "enName": "Ethiopian birr",
+        "cnName": "埃塞俄比亚比尔"
+    },
+    {
+        "alphabeticCode": "USS",
+        "numericCode": "998",
+        "enName": "United States dollar (same day) (funds code)[10]",
+        "cnName": "美元（同日，资金代码）[9]"
+    },
+    {
+        "alphabeticCode": "SOS",
+        "numericCode": "706",
+        "enName": "Somali shilling",
+        "cnName": "索马里先令"
+    },
+    {
+        "alphabeticCode": "VUV",
+        "numericCode": "548",
+        "enName": "Vanuatu vatu",
+        "cnName": "瓦努阿图瓦图"
+    },
+    {
+        "alphabeticCode": "VEF",
+        "numericCode": "937",
+        "enName": "Venezuelan bolívar",
+        "cnName": "委内瑞拉玻利瓦尔"
+    },
+    {
+        "alphabeticCode": "KGS",
+        "numericCode": "417",
+        "enName": "Kyrgyzstani som",
+        "cnName": "吉尔吉斯斯坦索姆"
+    },
+    {
+        "alphabeticCode": "LAK",
+        "numericCode": "418",
+        "enName": "Lao kip",
+        "cnName": "老挝基普"
+    },
+    {
+        "alphabeticCode": "BND",
+        "numericCode": "096",
+        "enName": "Brunei dollar",
+        "cnName": "汶莱元"
+    },
+    {
+        "alphabeticCode": "XAF",
+        "numericCode": "950",
+        "enName": "CFA franc BEAC",
+        "cnName": "中非法郎"
+    },
+    {
+        "alphabeticCode": "LRD",
+        "numericCode": "430",
+        "enName": "Liberian dollar",
+        "cnName": "利比里亚元"
+    },
+    {
+        "alphabeticCode": "XAG",
+        "numericCode": "961",
+        "enName": "Silver (one troy ounce)",
+        "cnName": "银（1金衡盎司）"
+    },
+    {
+        "alphabeticCode": "CHF",
+        "numericCode": "756",
+        "enName": "Swiss franc",
+        "cnName": "瑞士法郎"
+    },
+    {
+        "alphabeticCode": "HRK",
+        "numericCode": "191",
+        "enName": "Croatian kuna",
+        "cnName": "克罗地亚库纳"
+    },
+    {
+        "alphabeticCode": "ALL",
+        "numericCode": "008",
+        "enName": "Albanian lek",
+        "cnName": "阿尔巴尼亚列克"
+    },
+    {
+        "alphabeticCode": "CHE",
+        "numericCode": "947",
+        "enName": "WIR Euro (complementary currency)",
+        "cnName": "WIR欧元（补充货币）"
+    },
+    {
+        "alphabeticCode": "DJF",
+        "numericCode": "262",
+        "enName": "Djiboutian franc",
+        "cnName": "吉布提法郎"
+    },
+    {
+        "alphabeticCode": "ZMW",
+        "numericCode": "967",
+        "enName": "Zambian kwacha",
+        "cnName": "赞比亚克瓦查"
+    },
+    {
+        "alphabeticCode": "TZS",
+        "numericCode": "834",
+        "enName": "Tanzanian shilling",
+        "cnName": "坦桑尼亚先令"
+    },
+    {
+        "alphabeticCode": "VND",
+        "numericCode": "704",
+        "enName": "Vietnamese dong",
+        "cnName": "越南盾"
+    },
+    {
+        "alphabeticCode": "XAU",
+        "numericCode": "959",
+        "enName": "Gold (one troy ounce)",
+        "cnName": "金（1金衡盎司）"
+    },
+    {
+        "alphabeticCode": "AUD",
+        "numericCode": "036",
+        "enName": "Australian dollar",
+        "cnName": "澳大利亚元"
+    },
+    {
+        "alphabeticCode": "ILS",
+        "numericCode": "376",
+        "enName": "Israeli new shekel",
+        "cnName": "以色列新谢克尔"
+    },
+    {
+        "alphabeticCode": "CHW",
+        "numericCode": "948",
+        "enName": "WIR Franc (complementary currency)",
+        "cnName": "WIR法郎（补充货币）"
+    },
+    {
+        "alphabeticCode": "KPW",
+        "numericCode": "408",
+        "enName": "North Korean won",
+        "cnName": "朝鲜圆"
+    },
+    {
+        "alphabeticCode": "GYD",
+        "numericCode": "328",
+        "enName": "Guyanese dollar",
+        "cnName": "圭亚那元"
+    },
+    {
+        "alphabeticCode": "GHS",
+        "numericCode": "936",
+        "enName": "Ghanaian cedi",
+        "cnName": "加纳塞地"
+    },
+    {
+        "alphabeticCode": "BOB",
+        "numericCode": "068",
+        "enName": "Boliviano",
+        "cnName": "玻利维亚诺"
+    },
+    {
+        "alphabeticCode": "KHR",
+        "numericCode": "116",
+        "enName": "Cambodian riel",
+        "cnName": "柬埔寨瑞尔"
+    },
+    {
+        "alphabeticCode": "MDL",
+        "numericCode": "498",
+        "enName": "Moldovan leu",
+        "cnName": "摩尔多瓦列伊"
+    },
+    {
+        "alphabeticCode": "IDR",
+        "numericCode": "360",
+        "enName": "Indonesian rupiah",
+        "cnName": "印尼盾"
+    },
+    {
+        "alphabeticCode": "XBA",
+        "numericCode": "955",
+        "enName": "European Composite Unit (EURCO) (bond market unit)",
+        "cnName": "欧洲货币合成单位（EURCO，债券市场单位）"
+    },
+    {
+        "alphabeticCode": "KYD",
+        "numericCode": "136",
+        "enName": "Cayman Islands dollar",
+        "cnName": "开曼群岛元"
+    },
+    {
+        "alphabeticCode": "AMD",
+        "numericCode": "051",
+        "enName": "Armenian dram",
+        "cnName": "亚美尼亚德拉姆"
+    },
+    {
+        "alphabeticCode": "XBC",
+        "numericCode": "957",
+        "enName": "European Unit of Account 9 (E.U.A.-9) (bond market unit)",
+        "cnName": "欧洲账户9单位（E.U.A.-9，债券市场单位）"
+    },
+    {
+        "alphabeticCode": "XBB",
+        "numericCode": "956",
+        "enName": "European Monetary Unit (E.M.U.-6) (bond market unit)",
+        "cnName": "欧洲金融单位（E.M.U.-6，债券市场单位）"
+    },
+    {
+        "alphabeticCode": "SHP",
+        "numericCode": "654",
+        "enName": "Saint Helena pound",
+        "cnName": "圣赫勒拿镑"
+    },
+    {
+        "alphabeticCode": "TRY",
+        "numericCode": "949",
+        "enName": "Turkish lira",
+        "cnName": "土耳其里拉"
+    },
+    {
+        "alphabeticCode": "BWP",
+        "numericCode": "072",
+        "enName": "Botswana pula",
+        "cnName": "博茨瓦纳普拉"
+    },
+    {
+        "alphabeticCode": "LBP",
+        "numericCode": "422",
+        "enName": "Lebanese pound",
+        "cnName": "黎巴嫩镑"
+    },
+    {
+        "alphabeticCode": "XBD",
+        "numericCode": "958",
+        "enName": "European Unit of Account 17 (E.U.A.-17) (bond market unit)",
+        "cnName": "欧洲账户17单位（E.U.A.-17，债券市场单位）"
+    },
+    {
+        "alphabeticCode": "TJS",
+        "numericCode": "972",
+        "enName": "Tajikistani somoni",
+        "cnName": "塔吉克斯坦索莫尼"
+    },
+    {
+        "alphabeticCode": "JOD",
+        "numericCode": "400",
+        "enName": "Jordanian dinar",
+        "cnName": "约旦第纳尔"
+    },
+    {
+        "alphabeticCode": "HKD",
+        "numericCode": "344",
+        "enName": "Hong Kong dollar",
+        "cnName": "港元"
+    },
+    {
+        "alphabeticCode": "AED",
+        "numericCode": "784",
+        "enName": "United Arab Emirates dirham",
+        "cnName": "阿联酋迪拉姆"
+    },
+    {
+        "alphabeticCode": "RWF",
+        "numericCode": "646",
+        "enName": "Rwandan franc",
+        "cnName": "卢旺达法郎"
+    },
+    {
+        "alphabeticCode": "EUR",
+        "numericCode": "978",
+        "enName": "Euro",
+        "cnName": "欧元"
+    },
+    {
+        "alphabeticCode": "LSL",
+        "numericCode": "426",
+        "enName": "Lesotho loti",
+        "cnName": "莱索托洛蒂"
+    },
+    {
+        "alphabeticCode": "DKK",
+        "numericCode": "208",
+        "enName": "Danish krone",
+        "cnName": "丹麦克朗"
+    },
+    {
+        "alphabeticCode": "CAD",
+        "numericCode": "124",
+        "enName": "Canadian dollar",
+        "cnName": "加拿大元"
+    },
+    {
+        "alphabeticCode": "BOV",
+        "numericCode": "984",
+        "enName": "Bolivian Mvdol (funds code)",
+        "cnName": "玻利维亚Mvdol（资金代码）"
+    },
+    {
+        "alphabeticCode": "BGN",
+        "numericCode": "975",
+        "enName": "Bulgarian lev",
+        "cnName": "保加利亚列弗"
+    },
+    {
+        "alphabeticCode": "MMK",
+        "numericCode": "104",
+        "enName": "Myanmar kyat",
+        "cnName": "缅元"
+    },
+    {
+        "alphabeticCode": "MUR",
+        "numericCode": "480",
+        "enName": "Mauritian rupee",
+        "cnName": "毛里求斯卢比"
+    },
+    {
+        "alphabeticCode": "NOK",
+        "numericCode": "578",
+        "enName": "Norwegian krone",
+        "cnName": "挪威克朗"
+    },
+    {
+        "alphabeticCode": "SYP",
+        "numericCode": "760",
+        "enName": "Syrian pound",
+        "cnName": "叙利亚镑"
+    },
+    {
+        "alphabeticCode": "GIP",
+        "numericCode": "292",
+        "enName": "Gibraltar pound",
+        "cnName": "直布罗陀镑"
+    },
+    {
+        "alphabeticCode": "RON",
+        "numericCode": "946",
+        "enName": "Romanian leu",
+        "cnName": "罗马尼亚列伊"
+    },
+    {
+        "alphabeticCode": "LKR",
+        "numericCode": "144",
+        "enName": "Sri Lankan rupee",
+        "cnName": "斯里兰卡卢比"
+    },
+    {
+        "alphabeticCode": "NGN",
+        "numericCode": "566",
+        "enName": "Nigerian naira",
+        "cnName": "尼日利亚奈拉"
+    },
+    {
+        "alphabeticCode": "CZK",
+        "numericCode": "203",
+        "enName": "Czech koruna",
+        "cnName": "捷克克朗"
+    },
+    {
+        "alphabeticCode": "CRC",
+        "numericCode": "188",
+        "enName": "Costa Rican colon",
+        "cnName": "哥斯达黎加科朗"
+    },
+    {
+        "alphabeticCode": "PKR",
+        "numericCode": "586",
+        "enName": "Pakistani rupee",
+        "cnName": "巴基斯坦卢比"
+    },
+    {
+        "alphabeticCode": "XCD",
+        "numericCode": "951",
+        "enName": "East Caribbean dollar",
+        "cnName": "东加勒比元"
+    },
+    {
+        "alphabeticCode": "HTG",
+        "numericCode": "332",
+        "enName": "Haitian gourde",
+        "cnName": "海地古德"
+    },
+    {
+        "alphabeticCode": "ANG",
+        "numericCode": "532",
+        "enName": "Netherlands Antillean guilder",
+        "cnName": "荷属安的列斯盾"
+    },
+    {
+        "alphabeticCode": "XSU",
+        "numericCode": "994",
+        "enName": "SUCRE",
+        "cnName": "苏克雷"
+    },
+    {
+        "alphabeticCode": "BHD",
+        "numericCode": "048",
+        "enName": "Bahraini dinar",
+        "cnName": "巴林第纳尔"
+    },
+    {
+        "alphabeticCode": "SRD",
+        "numericCode": "968",
+        "enName": "Surinamese dollar",
+        "cnName": "苏里南元"
+    },
+    {
+        "alphabeticCode": "SZL",
+        "numericCode": "748",
+        "enName": "Swazi lilangeni",
+        "cnName": "斯威士兰里兰吉尼"
+    },
+    {
+        "alphabeticCode": "KZT",
+        "numericCode": "398",
+        "enName": "Kazakhstani tenge",
+        "cnName": "哈萨克斯坦坚戈"
+    },
+    {
+        "alphabeticCode": "TTD",
+        "numericCode": "780",
+        "enName": "Trinidad and Tobago dollar",
+        "cnName": "特立尼达和多巴哥元"
+    },
+    {
+        "alphabeticCode": "SAR",
+        "numericCode": "682",
+        "enName": "Saudi riyal",
+        "cnName": "沙特里亚尔"
+    },
+    {
+        "alphabeticCode": "YER",
+        "numericCode": "886",
+        "enName": "Yemeni rial",
+        "cnName": "也门里亚尔"
+    },
+    {
+        "alphabeticCode": "MVR",
+        "numericCode": "462",
+        "enName": "Maldivian rufiyaa",
+        "cnName": "马尔代夫拉菲亚"
+    },
+    {
+        "alphabeticCode": "AFN",
+        "numericCode": "971",
+        "enName": "Afghan afghani",
+        "cnName": "阿富汗阿富汗尼"
+    },
+    {
+        "alphabeticCode": "INR",
+        "numericCode": "356",
+        "enName": "Indian rupee",
+        "cnName": "印度卢比"
+    },
+    {
+        "alphabeticCode": "KRW",
+        "numericCode": "410",
+        "enName": "South Korean won",
+        "cnName": "韩圆"
+    },
+    {
+        "alphabeticCode": "AWG",
+        "numericCode": "533",
+        "enName": "Aruban florin",
+        "cnName": "阿鲁巴弗罗林"
+    },
+    {
+        "alphabeticCode": "NPR",
+        "numericCode": "524",
+        "enName": "Nepalese rupee",
+        "cnName": "尼泊尔卢比"
+    },
+    {
+        "alphabeticCode": "MNT",
+        "numericCode": "496",
+        "enName": "Mongolian tögrög",
+        "cnName": "蒙古图格里克"
+    },
+    {
+        "alphabeticCode": "JPY",
+        "numericCode": "392",
+        "enName": "Japanese yen",
+        "cnName": "日圆"
+    },
+    {
+        "alphabeticCode": "PLN",
+        "numericCode": "985",
+        "enName": "Polish złoty",
+        "cnName": "波兰兹罗提"
+    },
+    {
+        "alphabeticCode": "AOA",
+        "numericCode": "973",
+        "enName": "Angolan kwanza",
+        "cnName": "安哥拉宽扎"
+    },
+    {
+        "alphabeticCode": "GBP",
+        "numericCode": "826",
+        "enName": "Pound sterling",
+        "cnName": "英镑"
+    },
+    {
+        "alphabeticCode": "SBD",
+        "numericCode": "090",
+        "enName": "Solomon Islands dollar",
+        "cnName": "所罗门群岛元"
+    },
+    {
+        "alphabeticCode": "XTS",
+        "numericCode": "963",
+        "enName": "Code reserved for testing purposes",
+        "cnName": "为测试而特别保留的代码"
+    },
+    {
+        "alphabeticCode": "HUF",
+        "numericCode": "348",
+        "enName": "Hungarian forint",
+        "cnName": "匈牙利福林"
+    },
+    {
+        "alphabeticCode": "BYR",
+        "numericCode": "974",
+        "enName": "Belarusian ruble",
+        "cnName": "白俄罗斯卢布"
+    },
+    {
+        "alphabeticCode": "BIF",
+        "numericCode": "108",
+        "enName": "Burundian franc",
+        "cnName": "布隆迪法郎"
+    },
+    {
+        "alphabeticCode": "MWK",
+        "numericCode": "454",
+        "enName": "Malawian kwacha",
+        "cnName": "马拉维克瓦查"
+    },
+    {
+        "alphabeticCode": "XUA",
+        "numericCode": "965",
+        "enName": "ADB Unit of Account",
+        "cnName": "非洲开发银行记帐单位"
+    },
+    {
+        "alphabeticCode": "MGA",
+        "numericCode": "969",
+        "enName": "Malagasy ariary",
+        "cnName": "马达加斯加阿里亚里"
+    },
+    {
+        "alphabeticCode": "XDR",
+        "numericCode": "960",
+        "enName": "Special drawing rights",
+        "cnName": "特别提款权"
+    },
+    {
+        "alphabeticCode": "BZD",
+        "numericCode": "084",
+        "enName": "Belize dollar",
+        "cnName": "伯利兹元"
+    },
+    {
+        "alphabeticCode": "BAM",
+        "numericCode": "977",
+        "enName": "Bosnia and Herzegovina convertible mark",
+        "cnName": "波斯尼亚和黑塞哥维那可兑换马克"
+    },
+    {
+        "alphabeticCode": "MOP",
+        "numericCode": "446",
+        "enName": "Macanese pataca",
+        "cnName": "澳门币"
+    },
+    {
+        "alphabeticCode": "EGP",
+        "numericCode": "818",
+        "enName": "Egyptian pound",
+        "cnName": "埃及镑"
+    },
+    {
+        "alphabeticCode": "NAD",
+        "numericCode": "516",
+        "enName": "Namibian dollar",
+        "cnName": "纳米比亚元"
+    },
+    {
+        "alphabeticCode": "SSP",
+        "numericCode": "728",
+        "enName": "South Sudanese pound",
+        "cnName": "南苏丹镑"
+    },
+    {
+        "alphabeticCode": "NIO",
+        "numericCode": "558",
+        "enName": "Nicaraguan córdoba",
+        "cnName": "尼加拉瓜科多巴"
+    },
+    {
+        "alphabeticCode": "PEN",
+        "numericCode": "604",
+        "enName": "Peruvian Sol",
+        "cnName": "秘鲁索尔"
+    },
+    {
+        "alphabeticCode": "WST",
+        "numericCode": "882",
+        "enName": "Samoan tala",
+        "cnName": "萨摩亚塔拉"
+    },
+    {
+        "alphabeticCode": "NZD",
+        "numericCode": "554",
+        "enName": "New Zealand dollar",
+        "cnName": "新西兰元"
+    },
+    {
+        "alphabeticCode": "TMT",
+        "numericCode": "934",
+        "enName": "Turkmenistani manat",
+        "cnName": "土库曼斯坦马纳特"
+    },
+    {
+        "alphabeticCode": "CLF",
+        "numericCode": "990",
+        "enName": "Unidad de Fomento (funds code)",
+        "cnName": "UF值（资金代码）"
+    },
+    {
+        "alphabeticCode": "BRL",
+        "numericCode": "986",
+        "enName": "Brazilian real",
+        "cnName": "巴西雷亚尔"
+    }
+]

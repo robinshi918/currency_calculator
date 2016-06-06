@@ -1,22 +1,31 @@
 package org.robinshi;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shiyun.myapplication.R;
-import org.robinshi.baidu.Convert;
 
+import org.robinshi.baidu.BaiDuApi;
+import org.robinshi.baidu.domain.ConvertResult;
+import org.robinshi.baidu.ResultListener;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CalculatorActivity extends AppCompatActivity {
@@ -30,8 +39,11 @@ public class CalculatorActivity extends AppCompatActivity {
     private Spinner lowerSpinner;
     private TextView hintTextView;
 
-    private ArrayAdapter<String> upperCurrencyListAdapter;
-    private ArrayAdapter<String> lowerCurrencyListAdapter;
+//    private ArrayAdapter<String> upperCurrencyListAdapter;
+//    private ArrayAdapter<String> lowerCurrencyListAdapter;
+
+    private ArrayAdapter<CurrencyNameMapper.Currency> upperAdapter;
+    private ArrayAdapter<CurrencyNameMapper.Currency> lowerAdapter;
 
     private List<String> currencyList;
 
@@ -75,103 +87,140 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     };
 
-
-
     private void convert() {
 
         String from, to;
         float amount;
         if (isUpperEditFocused) {
-            from = (String) upperSpinner.getSelectedItem();
-            to = (String) lowerSpinner.getSelectedItem();
+            from = ((CurrencyNameMapper.Currency) upperSpinner.getSelectedItem()).alphabeticCode;
+            to = ((CurrencyNameMapper.Currency) lowerSpinner.getSelectedItem()).alphabeticCode;
             amount = Float.parseFloat(upperEdit.getText().toString());
         } else {
-            from = (String) lowerSpinner.getSelectedItem();
-            to = (String) upperSpinner.getSelectedItem();
+            from = ((CurrencyNameMapper.Currency)lowerSpinner.getSelectedItem()).alphabeticCode;
+            to = ((CurrencyNameMapper.Currency) upperSpinner.getSelectedItem()).alphabeticCode;
             amount = Float.parseFloat(lowerEdit.getText().toString());
         }
 
         Log.d(TAG, String.format("converting:  %s->%s (%f) ", from, to, amount));
 
-        BaiDuApi.getInstance().convert(amount, from, to, new BaiDuApi.Listener<Convert>() {
+        BaiDuApi.getInstance().convert(amount, from, to, new ResultListener<ConvertResult>() {
             @Override
-            public void onResponse(final Convert result) {
+            public void onResponse(final ConvertResult result) {
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (result != null) {
-                            String value = String.format("%.4f", result.getRetData().getConvertedamount());
+                if (result != null) {
+                    String value = String.format("%.4f", result.getRetData().getConvertedamount());
 
-                            if (isUpperEditFocused) {
-                                lowerEdit.setText(value);
-                            } else {
-                                upperEdit.setText(value);
-                            }
-
-                            hintTextView.setText(result.getRetData().getDate() + " " + result.getRetData().getTime());
-
-                        }
+                    if (isUpperEditFocused) {
+                        lowerEdit.setText(value);
+                    } else {
+                        upperEdit.setText(value);
                     }
-                });
+
+                    hintTextView.setText(result.getRetData().getDate() + " " + result.getRetData().getTime());
+
+                }
             }
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CalculatorActivity.this, "", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                Toast.makeText(CalculatorActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private void initCurrencySpinner() {
+        upperAdapter = new CustomArrayAdapter(this, R.layout.spinner_dropdown_item);
+        Collection<CurrencyNameMapper.Currency> list = CurrencyNameMapper.getInstance().getAll();
+        upperAdapter.addAll(list);
+        upperAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        upperSpinner.setAdapter(upperAdapter);
+
+        lowerAdapter = new CustomArrayAdapter(this, R.layout.spinner_dropdown_item);
+        lowerAdapter.addAll(CurrencyNameMapper.getInstance().getAll());
+        lowerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        lowerSpinner.setAdapter(lowerAdapter);
+    }
+
+    public class CustomArrayAdapter extends ArrayAdapter<CurrencyNameMapper.Currency> {
+
+        LayoutInflater mInflater;
+        List<CurrencyNameMapper.Currency> mData;
+
+        public CustomArrayAdapter(Context context, int resId) {
+            super(context, resId);
+            mInflater = LayoutInflater.from(context);
+            mData = new ArrayList<>(CurrencyNameMapper.getInstance().getAll());
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder viewHolder = new ViewHolder();
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.spinner_dropdown_item, null);
+                viewHolder.textView = (TextView) convertView.findViewById(R.id.text_view);
+                viewHolder.imgView = (ImageView) convertView.findViewById(R.id.flag_icon);
+
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            CurrencyNameMapper.Currency item = mData.get(position);
+            viewHolder.textView.setText(item.cnName);
+
+            return convertView;
+        }
+
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getView(position, convertView, parent);
+        }
+    }
+
+    class ViewHolder {
+        TextView textView;
+        ImageView imgView;
+    }
+
 
     private void getList() {
-        BaiDuApi.getInstance().getCurrencyList(new BaiDuApi.Listener<List<String>>() {
+        BaiDuApi.getInstance().getCurrencyList(new ResultListener<List<String>>() {
             @Override
             public void onResponse(final List<String> result) {
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        currencyList = result;
+                currencyList = result;
+//
+//                if (upperCurrencyListAdapter == null) {
+//                    upperCurrencyListAdapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_item, result);
+//                    upperCurrencyListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                } else {
+//                    upperCurrencyListAdapter.clear();
+//                    upperCurrencyListAdapter.addAll(result);
+//                }
+//                upperSpinner.setAdapter(upperCurrencyListAdapter);
+//
+//                if (lowerCurrencyListAdapter == null) {
+//                    lowerCurrencyListAdapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_item, result);
+//                    lowerCurrencyListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                } else {
+//                    lowerCurrencyListAdapter.clear();
+//                    lowerCurrencyListAdapter.addAll(result);
+//                }
+//                lowerSpinner.setAdapter(lowerCurrencyListAdapter);
 
-                        if (upperCurrencyListAdapter == null) {
-                            upperCurrencyListAdapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_item, result);
-                            upperCurrencyListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        } else {
-                            upperCurrencyListAdapter.clear();
-                            upperCurrencyListAdapter.addAll(result);
-                        }
-                        upperSpinner.setAdapter(upperCurrencyListAdapter);
-
-                        if (lowerCurrencyListAdapter == null) {
-                            lowerCurrencyListAdapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_item, result);
-                            lowerCurrencyListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        } else {
-                            lowerCurrencyListAdapter.clear();
-                            lowerCurrencyListAdapter.addAll(result);
-                        }
-                        lowerSpinner.setAdapter(lowerCurrencyListAdapter);
-
-                        setDefaultCurrency();
-                    }
-                });
+//                setDefaultCurrency();
 
             }
 
             @Override
             public void onError(final Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CalculatorActivity.this, "failed to get currency list!" + e.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+                Toast.makeText(CalculatorActivity.this, "failed to get currency list!" + e.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,6 +233,7 @@ public class CalculatorActivity extends AppCompatActivity {
         findViews();
         initListeners();
         initData();
+        initCurrencySpinner();
     }
 
     private float exchangeRate = 0.0f;
@@ -191,7 +241,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private String lowerCurrency = "USD";
 
     private void initData() {
-        getList();
+        //getList();
     }
 
     private void initListeners() {
@@ -226,7 +276,7 @@ public class CalculatorActivity extends AppCompatActivity {
         upperSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                upperCurrency = upperCurrencyListAdapter.getItem(position);
+                upperCurrency = upperAdapter.getItem(position).alphabeticCode;
             }
 
             @Override
@@ -236,7 +286,7 @@ public class CalculatorActivity extends AppCompatActivity {
         lowerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                lowerCurrency = lowerCurrencyListAdapter.getItem(position);
+                lowerCurrency = lowerAdapter.getItem(position).alphabeticCode;
             }
 
             @Override

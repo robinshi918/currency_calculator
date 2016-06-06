@@ -1,13 +1,17 @@
-package org.robinshi;
+package org.robinshi.baidu;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 
-import org.robinshi.baidu.Convert;
-import org.robinshi.baidu.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.robinshi.CCApplication;
+import org.robinshi.CacheManager;
+import org.robinshi.baidu.domain.ConvertResult;
+import org.robinshi.baidu.domain.TypeResult;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -42,77 +46,77 @@ public class BaiDuApi {
     private BaiDuApi() {
     }
 
-    public interface Listener<T> {
-        void onResponse(T result);
-        void onError(Exception e);
-    }
 
+    public void getCurrencyList(final ResultListener<List<String>> resultListener) {
 
-    public void getCurrencyList(final Listener<List<String>> listener) {
-
-        if (listener == null) {
-            throw new IllegalArgumentException("listener is null");
+        if (resultListener == null) {
+            throw new IllegalArgumentException("resultListener is null");
         }
 
-        httpRequest(CURRENCY_TYPE_URL, "", new Listener<String>() {
+        httpRequest(CURRENCY_TYPE_URL, "", new ResultListener<String>() {
             @Override
             public void onResponse(String text) {
                 Log.d(TAG, "getCurrencyList: " + text);
 
                 Gson gson = new Gson();
-                Type type = gson.fromJson(text, new TypeToken<Type>() {}.getType());
+                TypeResult type = gson.fromJson(text, new TypeToken<TypeResult>() {
+                }.getType());
 
                 if (type.getRetData() != null && type.getRetData().size() > 0) {
-                    listener.onResponse(type.getRetData());
+                    CacheManager.getInstance().putString(CacheManager.KEY_CURRENCY_LIST, text);
+                    resultListener.onResponse(type.getRetData());
                 } else {
-                    listener.onError(new Exception("getCurrencyTypeList() 服务端返回数据解析失败" + text));
+                    resultListener.onError(new Exception("getCurrencyTypeList() 服务端返回数据解析失败" + text));
                 }
+
             }
 
             @Override
             public void onError(Exception e) {
                 e.printStackTrace();
-                listener.onError(e);
+                resultListener.onError(e);
             }
         });
 
 
     }
 
-    public void convert(float amount, String fromCurrency, String toCurrency, final Listener<Convert> listener) {
+    public void convert(float amount, String fromCurrency, String toCurrency, final ResultListener<ConvertResult> resultListener) {
 
-        if (listener == null) {
-            throw new IllegalArgumentException("convert() listener == null");
+        if (resultListener == null) {
+            throw new IllegalArgumentException("convert() resultListener == null");
         }
 
         if (amount < 0 || TextUtils.isEmpty(fromCurrency) || TextUtils.isEmpty(toCurrency)) {
-            listener.onResponse(null);
+            resultListener.onResponse(null);
             return;
         }
         String httpArgs = String.format("fromCurrency=%s&toCurrency=%s&amount=%f", fromCurrency, toCurrency, amount);
-        httpRequest(CONVERT_API_URL, httpArgs, new Listener<String>() {
+        httpRequest(CONVERT_API_URL, httpArgs, new ResultListener<String>() {
             @Override
             public void onResponse(String data) {
                 Log.d(TAG, "convert() data = " + data);
 
                 if (!TextUtils.isEmpty(data)) {
                     Gson gson = new Gson();
-                    Convert result = gson.fromJson(data, new TypeToken<Convert>() {
+                    ConvertResult result = gson.fromJson(data, new TypeToken<ConvertResult>() {
                     }.getType());
 
                     Log.i(TAG, result.toString());
 
-                    if (result != null) {
-                        listener.onResponse(result);
-                    }
+                    CacheManager.getInstance().putString(
+                            result.getRetData().getFromCurrency() + result.getRetData().getToCurrency(),
+                            data);
+
+                    resultListener.onResponse(result);
                 } else {
-                    listener.onError(new Exception("server returned empty data!"));
+                    resultListener.onError(new Exception("server returned empty data!"));
                 }
             }
 
             @Override
             public void onError(Exception e) {
-                listener.onError(e);
+                resultListener.onError(e);
             }
         });
     }
@@ -134,7 +138,7 @@ public class BaiDuApi {
         return updateTime;
     }
 
-    public void httpRequest(final String apiAddress, final String httpArg, final Listener<String> listener) {
+    public void httpRequest(final String apiAddress, final String httpArg, final ResultListener<String> resultListener) {
 
         new Thread(new Runnable() {
             @Override
@@ -161,13 +165,25 @@ public class BaiDuApi {
                     reader.close();
                     result = sbf.toString();
 
-                    if (listener != null) {
-                        listener.onResponse(result);
-                    }
-                } catch (Exception e) {
-                    if (listener != null) {
-                        listener.onError(e);
-                    }
+                    final String tmpResult = result;
+                    new Handler(CCApplication.getAppInstance().getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (resultListener != null) {
+                                resultListener.onResponse(tmpResult);
+                            }
+                        }
+                    });
+                } catch (final Exception e) {
+                    new Handler(CCApplication.getAppInstance().getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (resultListener != null) {
+                                resultListener.onError(e);
+                            }
+                        }
+                    });
+
                 }
             }
         }).start();

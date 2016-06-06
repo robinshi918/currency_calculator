@@ -1,27 +1,22 @@
 package org.robinshi;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.shiyun.myapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
+import org.robinshi.baidu.BaiDuApi;
+import org.robinshi.baidu.domain.ConvertResult;
+import org.robinshi.baidu.ResultListener;
+import org.robinshi.baidu.domain.TypeResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RatesManager {
 
     private static final String TAG = RatesManager.class.getSimpleName();
-
-    private BaiDuApi baiduApi;
 
     private static RatesManager instance;
 
@@ -43,15 +38,48 @@ public class RatesManager {
      * @param toCurrency to currency type
      * @return result after converting
      */
-    public String convert(Float fromValue, String fromCurrency, String toCurrency) {
+    public void convert(Float fromValue, String fromCurrency, String toCurrency, ResultListener<ConvertResult> listener) {
+
         if (fromValue <  0.0 || TextUtils.isEmpty(fromCurrency) || TextUtils.isEmpty(toCurrency)) {
             Log.d(TAG, "convert() invalid parameter");
-            return "";
+            return;
         }
-        return "";
+
+        String cache = CacheManager.getInstance().getString(fromCurrency + toCurrency);
+        if (TextUtils.isEmpty(cache)) {
+            if (listener != null) {
+                Gson gson = new Gson();
+                ConvertResult convert = gson.fromJson(cache, new TypeToken<ConvertResult>(){}.getType());
+                if (!convert.hasExpire()) {
+                    if (listener != null) {
+                        listener.onResponse(convert);
+                    }
+                }
+            }
+        } else {
+            BaiDuApi.getInstance().convert(fromValue, fromCurrency, toCurrency, listener);
+        }
+
+
     }
 
-    public List<String> getCurrencyList() {
+    public void getCurrencyList(ResultListener<List<String>> listener) {
+        String cache = CacheManager.getInstance().getString(CacheManager.KEY_CURRENCY_LIST);
+
+        if (TextUtils.isEmpty(cache)) {
+            BaiDuApi.getInstance().getCurrencyList(listener);
+        } else {
+            Gson gson = new Gson();
+            TypeResult type = gson.fromJson(cache, new TypeToken<TypeResult>() {}.getType());
+            if (listener != null) {
+                listener.onResponse(type.getRetData());
+            }
+        }
+    }
+
+
+
+    public List<String> getFrequentCurrencyList() {
         List<String> list = new ArrayList<>();
         String[] freqList = {"CNY",
                 "JPY",
@@ -67,12 +95,6 @@ public class RatesManager {
                 "SUR",
                 "KRW"
         };
-
-        return list;
-    }
-
-    public List<String> getFrequentCurrencyList() {
-        List<String> list = new ArrayList<>();
 
         return list;
     }

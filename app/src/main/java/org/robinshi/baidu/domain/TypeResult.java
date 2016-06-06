@@ -1,4 +1,4 @@
-package org.robinshi.baidu;
+package org.robinshi.baidu.domain;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by shiyun on 16/5/28.
  */
-public class Type implements Serializable {
+public class TypeResult extends CacheItem implements Serializable {
 
     /**
 *
@@ -38,5 +38,10 @@ public class Type implements Serializable {
 
     public List<String> getRetData() {
         return retData;
+    }
+
+    @Override
+    public boolean hasExpire() {
+        return false;
     }
 }
