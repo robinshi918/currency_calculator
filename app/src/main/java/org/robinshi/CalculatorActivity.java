@@ -149,7 +149,7 @@ public class CalculatorActivity extends AppCompatActivity {
         public CustomArrayAdapter(Context context, int resId) {
             super(context, resId);
             mInflater = LayoutInflater.from(context);
-            mData = new ArrayList<>(CurrencyNameMapper.getInstance().getAll());
+            mData = CurrencyNameMapper.getInstance().getAll();
         }
 
         @Override
