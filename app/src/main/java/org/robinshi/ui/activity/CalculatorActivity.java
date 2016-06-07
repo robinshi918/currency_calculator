@@ -1,30 +1,27 @@
-package org.robinshi;
+package org.robinshi.ui.activity;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import org.robinshi.baidu.BaiDuApi;
-import org.robinshi.baidu.domain.ConvertResult;
-import org.robinshi.baidu.ResultListener;
+import org.robinshi.engine.CurrencyNameMapper;
+import org.robinshi.ui.widget.CustomArrayAdapter;
+import org.robinshi.R;
+import org.robinshi.engine.baidu.BaiDuApi;
+import org.robinshi.engine.baidu.domain.ConvertResult;
+import org.robinshi.engine.baidu.ResultListener;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,9 +35,6 @@ public class CalculatorActivity extends AppCompatActivity {
     private Spinner upperSpinner;
     private Spinner lowerSpinner;
     private TextView hintTextView;
-
-//    private ArrayAdapter<String> upperCurrencyListAdapter;
-//    private ArrayAdapter<String> lowerCurrencyListAdapter;
 
     private ArrayAdapter<CurrencyNameMapper.Currency> upperAdapter;
     private ArrayAdapter<CurrencyNameMapper.Currency> lowerAdapter;
@@ -129,65 +123,18 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private void initCurrencySpinner() {
-        upperAdapter = new CustomArrayAdapter(this, R.layout.spinner_dropdown_item);
+        upperAdapter = new CustomArrayAdapter(this, this, R.layout.spinner_dropdown_item);
         Collection<CurrencyNameMapper.Currency> list = CurrencyNameMapper.getInstance().getAll();
         upperAdapter.addAll(list);
         upperAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         upperSpinner.setAdapter(upperAdapter);
 
-        lowerAdapter = new CustomArrayAdapter(this, R.layout.spinner_dropdown_item);
+        lowerAdapter = new CustomArrayAdapter(this, this, R.layout.spinner_dropdown_item);
         lowerAdapter.addAll(CurrencyNameMapper.getInstance().getAll());
         lowerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         lowerSpinner.setAdapter(lowerAdapter);
     }
 
-    public class CustomArrayAdapter extends ArrayAdapter<CurrencyNameMapper.Currency> {
-
-        LayoutInflater mInflater;
-        List<CurrencyNameMapper.Currency> mData;
-
-        public CustomArrayAdapter(Context context, int resId) {
-            super(context, resId);
-            mInflater = LayoutInflater.from(context);
-            mData = CurrencyNameMapper.getInstance().getAll();
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewHolder viewHolder = new ViewHolder();
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.spinner_dropdown_item, null);
-                viewHolder.textView = (TextView) convertView.findViewById(R.id.text_view);
-                viewHolder.imgView = (ImageView) convertView.findViewById(R.id.flag_icon);
-
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-
-            CurrencyNameMapper.Currency item = mData.get(position);
-            viewHolder.textView.setText(item.cnName);
-            viewHolder.imgView.setImageBitmap(ImageManager.getInstance().getBitmap(item.alphabeticCode));
-
-            return convertView;
-        }
-
-        @Override
-        public int getCount() {
-            return mData.size();
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return getView(position, convertView, parent);
-        }
-    }
-
-    class ViewHolder {
-        TextView textView;
-        ImageView imgView;
-    }
 
 
     private void getList() {
@@ -196,27 +143,8 @@ public class CalculatorActivity extends AppCompatActivity {
             public void onResponse(final List<String> result) {
 
                 currencyList = result;
-//
-//                if (upperCurrencyListAdapter == null) {
-//                    upperCurrencyListAdapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_item, result);
-//                    upperCurrencyListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                } else {
-//                    upperCurrencyListAdapter.clear();
-//                    upperCurrencyListAdapter.addAll(result);
-//                }
-//                upperSpinner.setAdapter(upperCurrencyListAdapter);
-//
-//                if (lowerCurrencyListAdapter == null) {
-//                    lowerCurrencyListAdapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_item, result);
-//                    lowerCurrencyListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                } else {
-//                    lowerCurrencyListAdapter.clear();
-//                    lowerCurrencyListAdapter.addAll(result);
-//                }
-//                lowerSpinner.setAdapter(lowerCurrencyListAdapter);
 
 //                setDefaultCurrency();
-
             }
 
             @Override

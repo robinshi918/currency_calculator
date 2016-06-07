@@ -1,6 +1,4 @@
-package org.robinshi.baidu.domain;
-
-import org.robinshi.baidu.ConvertRetData;
+package org.robinshi.engine.baidu.domain;
 
 /**
  * convert result of BaiduApi

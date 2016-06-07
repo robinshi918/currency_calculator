@@ -1,4 +1,4 @@
-package org.robinshi;
+package org.robinshi.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ public class H5JavascriptActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_h5_javascript);
 
         Button button1 = (Button) findViewById(R.id.button);
         Button button2 = (Button) findViewById(R.id.jumpButton);

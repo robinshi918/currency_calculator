@@ -1,4 +1,4 @@
-package org.robinshi.baidu;
+package org.robinshi.engine.baidu;
 
 import android.os.Handler;
 import android.text.TextUtils;
@@ -9,9 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.robinshi.CCApplication;
-import org.robinshi.CacheManager;
-import org.robinshi.baidu.domain.ConvertResult;
-import org.robinshi.baidu.domain.TypeResult;
+import org.robinshi.engine.CacheManager;
+import org.robinshi.engine.baidu.domain.ConvertResult;
+import org.robinshi.engine.baidu.domain.TypeResult;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package org.robinshi.baidu;
+package org.robinshi.engine.baidu;
 
 /**
  * Created by shiyun on 16/6/4.

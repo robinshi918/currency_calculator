@@ -3,7 +3,7 @@ package org.robinshi;
 import android.app.Application;
 import android.content.Context;
 
-import java.util.concurrent.ExecutorService;
+import org.robinshi.engine.CurrencyNameMapper;
 
 /**
  * Created by shiyun on 16/6/3.
@@ -17,6 +17,10 @@ public class CCApplication extends Application {
         super.onCreate();
         instance = this;
 
+        init();
+    }
+
+    private void init() {
         new Thread(new Runnable() {
             @Override
             public void run() {

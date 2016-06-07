@@ -1,9 +1,11 @@
-package org.robinshi;
+package org.robinshi.engine;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
+
+import org.robinshi.CCApplication;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by shiyun on 16/6/7.
+ * maintain image cache
  */
 public class ImageManager {
 

@@ -1,4 +1,4 @@
-package org.robinshi;
+package org.robinshi.engine;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -6,10 +6,10 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.robinshi.baidu.BaiDuApi;
-import org.robinshi.baidu.domain.ConvertResult;
-import org.robinshi.baidu.ResultListener;
-import org.robinshi.baidu.domain.TypeResult;
+import org.robinshi.engine.baidu.BaiDuApi;
+import org.robinshi.engine.baidu.domain.ConvertResult;
+import org.robinshi.engine.baidu.ResultListener;
+import org.robinshi.engine.baidu.domain.TypeResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +76,6 @@ public class RatesManager {
             }
         }
     }
-
 
 
     public List<String> getFrequentCurrencyList() {

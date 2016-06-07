@@ -1,4 +1,4 @@
-package org.robinshi.baidu.domain;
+package org.robinshi.engine.baidu.domain;
 
 /**
  * Created by shiyun on 16/6/4.

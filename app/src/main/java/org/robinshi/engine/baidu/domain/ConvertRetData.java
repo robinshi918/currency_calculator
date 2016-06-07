@@ -1,4 +1,4 @@
-package org.robinshi.baidu;
+package org.robinshi.engine.baidu.domain;
 
 import java.io.Serializable;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package org.robinshi;
+package org.robinshi.engine;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.robinshi.CCApplication;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -98,9 +100,7 @@ public class CurrencyNameMapper {
         public String numericCode;        // ISO number code
         public String enName;             // English Name
         public String cnName;             // Chinese Name
-        public String symbol;             // currency symbol character
-        public String iconPath;           // icon path
-        public Bitmap bitmap;
+        public Bitmap bitmap;             // national flag icon
 
         @Override
         public String toString() {
@@ -109,8 +109,6 @@ public class CurrencyNameMapper {
                     ", numericCode='" + numericCode + '\'' +
                     ", enName='" + enName + '\'' +
                     ", cnName='" + cnName + '\'' +
-                    ", symbol='" + symbol + '\'' +
-                    ", iconPath='" + iconPath + '\'' +
                     '}';
         }
     }

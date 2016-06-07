@@ -1,4 +1,4 @@
-package org.robinshi;
+package org.robinshi.engine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +8,7 @@ import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.robinshi.CCApplication;
 
 /**
  * Created by shiyun on 16/6/2.
