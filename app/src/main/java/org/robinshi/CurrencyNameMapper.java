@@ -1,7 +1,6 @@
 package org.robinshi;
 
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -9,11 +8,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -53,7 +50,7 @@ public class CurrencyNameMapper {
      */
     private void load() {
 
-        String jsonData = readFile2("currency_table.txt");
+        String jsonData = readFile("currency_table.txt");
 
         LinkedList<Currency> list = null;
         if (!TextUtils.isEmpty(jsonData)) {
@@ -71,37 +68,8 @@ public class CurrencyNameMapper {
         }
     }
 
-    /**
-     * read file into a String.
-     * @param fileName file name
-     * @return
-     */
     private String readFile(String fileName) {
 
-        String str = "";
-        try {
-            AssetManager am = CCApplication.getAppInstance().getAssets();
-            AssetFileDescriptor fd = am.openFd(fileName);
-            FileInputStream fin = new FileInputStream(fd.getFileDescriptor());
-
-            // size  为字串的长度 ，这里一次性读完
-            int size = fin.available();
-            byte[] buffer = new byte[size];
-            fin.read(buffer);
-            fin.close();
-            str = new String(buffer, "UTF-8");
-
-
-        } catch (IOException e) {
-            Log.e(TAG, e.toString());
-            e.printStackTrace();
-            return null;
-        }
-
-        return str;
-    }
-
-    private String readFile2(String fileName) {
         String str = "";
         try {
             InputStream in = CCApplication.getAppInstance().getAssets().open(fileName);
@@ -112,7 +80,7 @@ public class CurrencyNameMapper {
             while((line  = bufReader.readLine()) != null) {
                 sb.append(line);
             }
-
+            in.close();
             str = sb.toString();
 
         } catch (IOException e) {
@@ -132,6 +100,7 @@ public class CurrencyNameMapper {
         public String cnName;             // Chinese Name
         public String symbol;             // currency symbol character
         public String iconPath;           // icon path
+        public Bitmap bitmap;
 
         @Override
         public String toString() {

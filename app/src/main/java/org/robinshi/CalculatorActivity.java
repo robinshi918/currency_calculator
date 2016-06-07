@@ -168,6 +168,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
             CurrencyNameMapper.Currency item = mData.get(position);
             viewHolder.textView.setText(item.cnName);
+            viewHolder.imgView.setImageBitmap(ImageManager.getInstance().getBitmap(item.alphabeticCode));
 
             return convertView;
         }
