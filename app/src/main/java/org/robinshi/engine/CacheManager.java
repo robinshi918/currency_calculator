@@ -77,5 +77,4 @@ public class CacheManager {
             putString(key, null);
         }
     }
-
 }

@@ -72,7 +72,7 @@ public class CurrencyNameMapper {
 
     private String readFile(String fileName) {
 
-        String str = "";
+        String content = "";
         try {
             InputStream in = CCApplication.getAppInstance().getAssets().open(fileName);
 
@@ -83,7 +83,7 @@ public class CurrencyNameMapper {
                 sb.append(line);
             }
             in.close();
-            str = sb.toString();
+            content = sb.toString();
 
         } catch (IOException e) {
             Log.e(TAG, e.toString());
@@ -91,7 +91,7 @@ public class CurrencyNameMapper {
             return null;
         }
 
-        return str;
+        return content;
     }
 
 

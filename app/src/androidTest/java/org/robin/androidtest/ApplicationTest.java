@@ -1,4 +1,4 @@
-package com.example.shiyun.myapplication;
+package org.robin.androidTest;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

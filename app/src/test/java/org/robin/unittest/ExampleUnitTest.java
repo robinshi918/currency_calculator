@@ -1,4 +1,4 @@
-package com.example.shiyun.myapplication;
+package org.robin.unittest;
 
 import org.junit.Test;
 
