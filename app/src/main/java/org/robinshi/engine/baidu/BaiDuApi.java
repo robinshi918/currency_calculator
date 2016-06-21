@@ -3,13 +3,13 @@ package org.robinshi.engine.baidu;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.robinshi.CCApplication;
-import org.robinshi.engine.CacheManager;
+import org.robinshi.util.DLog;
+import org.robinshi.engine.Cache;
 import org.robinshi.engine.baidu.domain.ConvertResult;
 import org.robinshi.engine.baidu.domain.TypeResult;
 
@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -29,7 +30,7 @@ public class BaiDuApi {
 
     private static final String TAG = BaiDuApi.class.getSimpleName();
 
-    private static final String API_KEY = "910031a7306e19669ccea798b2b20a55";
+    private static final String API_KEY = "910031a7306e19669ccea798b2b20a55";  // API key in BAIDU
 
     private static final String CURRENCY_TYPE_URL = "http://apis.baidu.com/apistore/currencyservice/type";
     private static final String CONVERT_API_URL = "http://apis.baidu.com/apistore/currencyservice/currency";
@@ -56,14 +57,14 @@ public class BaiDuApi {
         httpRequest(CURRENCY_TYPE_URL, "", new ResultListener<String>() {
             @Override
             public void onResponse(String text) {
-                Log.d(TAG, "getCurrencyList: " + text);
+                DLog.d(TAG, "getCurrencyList: " + text);
 
                 Gson gson = new Gson();
                 TypeResult type = gson.fromJson(text, new TypeToken<TypeResult>() {
                 }.getType());
 
                 if (type.getRetData() != null && type.getRetData().size() > 0) {
-                    CacheManager.getInstance().putString(CacheManager.KEY_CURRENCY_LIST, text);
+                    Cache.getInstance().putString(Cache.KEY_CURRENCY_LIST, text);
                     resultListener.onResponse(type.getRetData());
                 } else {
                     resultListener.onError(new Exception("getCurrencyTypeList() 服务端返回数据解析失败" + text));
@@ -91,20 +92,20 @@ public class BaiDuApi {
             resultListener.onResponse(null);
             return;
         }
-        String httpArgs = String.format("fromCurrency=%s&toCurrency=%s&amount=%f", fromCurrency, toCurrency, amount);
+        String httpArgs = String.format(Locale.ENGLISH, "fromCurrency=%s&toCurrency=%s&amount=%f", fromCurrency, toCurrency, amount);
         httpRequest(CONVERT_API_URL, httpArgs, new ResultListener<String>() {
             @Override
             public void onResponse(String data) {
-                Log.d(TAG, "convert() data = " + data);
+                DLog.d(TAG, "convert() data = " + data);
 
                 if (!TextUtils.isEmpty(data)) {
                     Gson gson = new Gson();
                     ConvertResult result = gson.fromJson(data, new TypeToken<ConvertResult>() {
                     }.getType());
 
-                    Log.i(TAG, result.toString());
+                    DLog.i(TAG, result.toString());
 
-                    CacheManager.getInstance().putString(
+                    Cache.getInstance().putString(
                             result.getRetData().getFromCurrency() + result.getRetData().getToCurrency(),
                             data);
 
@@ -126,7 +127,7 @@ public class BaiDuApi {
     //TODO
     public String getTimestamp() {
         if (updateTime != null) {
-            return DateFormat.format("", updateTime).toString(); // FIXME TODO
+            return DateFormat.format("yyyy-MM-dd HH:mm:ss", updateTime).toString(); // FIXME TODO
         }
         return "";
     }

@@ -1,11 +1,11 @@
 package org.robinshi.engine;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.robinshi.util.DLog;
 import org.robinshi.engine.baidu.BaiDuApi;
 import org.robinshi.engine.baidu.domain.ConvertResult;
 import org.robinshi.engine.baidu.ResultListener;
@@ -41,11 +41,11 @@ public class RatesManager {
     public void convert(Float fromValue, String fromCurrency, String toCurrency, ResultListener<ConvertResult> listener) {
 
         if (fromValue <  0.0 || TextUtils.isEmpty(fromCurrency) || TextUtils.isEmpty(toCurrency)) {
-            Log.d(TAG, "convert() invalid parameter");
+            DLog.d(TAG, "convert() invalid parameter");
             return;
         }
 
-        String cache = CacheManager.getInstance().getString(fromCurrency + toCurrency);
+        String cache = Cache.getInstance().getString(fromCurrency + toCurrency);
         if (TextUtils.isEmpty(cache)) {
             if (listener != null) {
                 Gson gson = new Gson();
@@ -64,7 +64,7 @@ public class RatesManager {
     }
 
     public void getCurrencyList(ResultListener<List<String>> listener) {
-        String cache = CacheManager.getInstance().getString(CacheManager.KEY_CURRENCY_LIST);
+        String cache = Cache.getInstance().getString(Cache.KEY_CURRENCY_LIST);
 
         if (TextUtils.isEmpty(cache)) {
             BaiDuApi.getInstance().getCurrencyList(listener);
@@ -80,7 +80,8 @@ public class RatesManager {
 
     public List<String> getFrequentCurrencyList() {
         List<String> list = new ArrayList<>();
-        String[] freqList = {"CNY",
+        String[] freqList = {
+                "CNY",
                 "JPY",
                 "GBP",
                 "CHF",

@@ -3,8 +3,8 @@ package org.robinshi.ui.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,8 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import org.robinshi.engine.CurrencyNameMapper;
-import org.robinshi.ui.widget.CustomArrayAdapter;
+import org.robinshi.engine.Setting;
+import org.robinshi.util.DLog;
+import org.robinshi.engine.Currency;
+import org.robinshi.engine.CurrencyMapper;
+import org.robinshi.ui.widget.CurrencyListAdapter;
 import org.robinshi.R;
 import org.robinshi.engine.baidu.BaiDuApi;
 import org.robinshi.engine.baidu.domain.ConvertResult;
@@ -36,8 +39,8 @@ public class CalculatorActivity extends AppCompatActivity {
     private Spinner lowerSpinner;
     private TextView hintTextView;
 
-    private ArrayAdapter<CurrencyNameMapper.Currency> upperAdapter;
-    private ArrayAdapter<CurrencyNameMapper.Currency> lowerAdapter;
+    private ArrayAdapter<Currency> upperAdapter;
+    private ArrayAdapter<Currency> lowerAdapter;
 
     private List<String> currencyList;
 
@@ -81,21 +84,51 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * when user selects an item in spinner, save the user selection
+     */
+    private AdapterView.OnItemSelectedListener mUpperSpinnerSelectionListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Currency currency = upperAdapter.getItem(position);
+            Setting.getInstance().setString(Setting.UPPER_CURRENCY_CODE, currency.alphabeticCode);
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    private AdapterView.OnItemSelectedListener mlowerSpinnerSelectionListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Currency currency = lowerAdapter.getItem(position);
+            Setting.getInstance().setString(Setting.LOWER_CURRENCY_CODE, currency.alphabeticCode);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
     private void convert() {
 
         String from, to;
         float amount;
         if (isUpperEditFocused) {
-            from = ((CurrencyNameMapper.Currency) upperSpinner.getSelectedItem()).alphabeticCode;
-            to = ((CurrencyNameMapper.Currency) lowerSpinner.getSelectedItem()).alphabeticCode;
+            from = ((Currency) upperSpinner.getSelectedItem()).alphabeticCode;
+            to = ((Currency) lowerSpinner.getSelectedItem()).alphabeticCode;
             amount = Float.parseFloat(upperEdit.getText().toString());
         } else {
-            from = ((CurrencyNameMapper.Currency)lowerSpinner.getSelectedItem()).alphabeticCode;
-            to = ((CurrencyNameMapper.Currency) upperSpinner.getSelectedItem()).alphabeticCode;
+            from = ((Currency)lowerSpinner.getSelectedItem()).alphabeticCode;
+            to = ((Currency) upperSpinner.getSelectedItem()).alphabeticCode;
             amount = Float.parseFloat(lowerEdit.getText().toString());
         }
 
-        Log.d(TAG, String.format("converting:  %s->%s (%f) ", from, to, amount));
+        DLog.d(TAG, String.format("converting:  %s->%s (%f) ", from, to, amount));
 
         BaiDuApi.getInstance().convert(amount, from, to, new ResultListener<ConvertResult>() {
             @Override
@@ -111,7 +144,6 @@ public class CalculatorActivity extends AppCompatActivity {
                     }
 
                     hintTextView.setText(result.getRetData().getDate() + " " + result.getRetData().getTime());
-
                 }
             }
 
@@ -123,18 +155,43 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private void initCurrencySpinner() {
-        upperAdapter = new CustomArrayAdapter(this, this, R.layout.spinner_dropdown_item);
-        Collection<CurrencyNameMapper.Currency> list = CurrencyNameMapper.getInstance().getAll();
+        upperAdapter = new CurrencyListAdapter(this, this, R.layout.spinner_dropdown_item);
+        Collection<Currency> list = CurrencyMapper.getInstance().getCurrencyList();
         upperAdapter.addAll(list);
         upperAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         upperSpinner.setAdapter(upperAdapter);
+        upperSpinner.setOnItemSelectedListener(mUpperSpinnerSelectionListener);
 
-        lowerAdapter = new CustomArrayAdapter(this, this, R.layout.spinner_dropdown_item);
-        lowerAdapter.addAll(CurrencyNameMapper.getInstance().getAll());
+        lowerAdapter = new CurrencyListAdapter(this, this, R.layout.spinner_dropdown_item);
+        lowerAdapter.addAll(CurrencyMapper.getInstance().getCurrencyList());
         lowerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         lowerSpinner.setAdapter(lowerAdapter);
+        lowerSpinner.setOnItemSelectedListener(mlowerSpinnerSelectionListener);
+
+        initUserSelection();
     }
 
+
+    private void initUserSelection() {
+        String upperSelection = Setting.getInstance().getString(Setting.UPPER_CURRENCY_CODE);
+        if (!TextUtils.isEmpty(upperSelection)) {
+            Currency currency = CurrencyMapper.getInstance().getCurrency(upperSelection);
+            int pos = CurrencyMapper.getInstance().find(currency);
+            if (pos != -1) {
+                upperSpinner.setSelection(pos);
+            }
+        }
+
+        String lowerSelection = Setting.getInstance().getString(Setting.LOWER_CURRENCY_CODE);
+        if (!TextUtils.isEmpty(lowerSelection)) {
+            Currency currency = CurrencyMapper.getInstance().getCurrency(upperSelection);
+            int pos = CurrencyMapper.getInstance().find(currency);
+            if (pos != -1) {
+                lowerSpinner.setSelection(pos);
+            }
+        }
+
+    }
 
 
     private void getList() {
@@ -153,7 +210,6 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

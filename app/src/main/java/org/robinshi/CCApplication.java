@@ -3,7 +3,7 @@ package org.robinshi;
 import android.app.Application;
 import android.content.Context;
 
-import org.robinshi.engine.CurrencyNameMapper;
+import org.robinshi.engine.CurrencyMapper;
 
 /**
  * Created by shiyun on 16/6/3.
@@ -24,7 +24,7 @@ public class CCApplication extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                CurrencyNameMapper.getInstance();
+                CurrencyMapper.getInstance();
             }
         }).start();
     }

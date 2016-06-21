@@ -8,7 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.robinshi.engine.CurrencyNameMapper;
+import org.robinshi.engine.Currency;
+import org.robinshi.engine.CurrencyMapper;
 import org.robinshi.engine.ImageManager;
 import org.robinshi.R;
 import org.robinshi.ui.activity.CalculatorActivity;
@@ -18,17 +19,17 @@ import java.util.List;
 /**
  * Created by shiyun on 16/6/7.
  */
-public class CustomArrayAdapter extends ArrayAdapter<CurrencyNameMapper.Currency> {
+public class CurrencyListAdapter extends ArrayAdapter<Currency> {
 
     LayoutInflater mInflater;
-    List<CurrencyNameMapper.Currency> mData;
+    List<Currency> mData;
     private CalculatorActivity calculatorActivity;
 
-    public CustomArrayAdapter(CalculatorActivity calculatorActivity, Context context, int resId) {
+    public CurrencyListAdapter(CalculatorActivity calculatorActivity, Context context, int resId) {
         super(context, resId);
         this.calculatorActivity = calculatorActivity;
         mInflater = LayoutInflater.from(context);
-        mData = CurrencyNameMapper.getInstance().getAll();
+        mData = CurrencyMapper.getInstance().getCurrencyList();
     }
 
     @Override
@@ -45,8 +46,8 @@ public class CustomArrayAdapter extends ArrayAdapter<CurrencyNameMapper.Currency
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        CurrencyNameMapper.Currency item = mData.get(position);
-        viewHolder.textView.setText(item.alphabeticCode + "  " + item.cnName);
+        Currency item = mData.get(position);
+        viewHolder.textView.setText(item.alphabeticCode + "" + item.cnName);
         viewHolder.imgView.setImageBitmap(
                 ImageManager.getInstance().getBitmap(item.alphabeticCode));
 

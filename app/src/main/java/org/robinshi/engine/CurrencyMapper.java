@@ -1,46 +1,53 @@
 package org.robinshi.engine;
 
-import android.graphics.Bitmap;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.robinshi.CCApplication;
+import org.robinshi.util.DLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Map currency ISO code to its Chinese Name and English Name
  */
-public class CurrencyNameMapper {
-    private static final String TAG = CurrencyNameMapper.class.getSimpleName();
+public class CurrencyMapper {
+    private static final String TAG = CurrencyMapper.class.getSimpleName();
 
-    private static CurrencyNameMapper mInstance;
+    private static CurrencyMapper mInstance;
 
-    private CurrencyNameMapper() {
+    private CurrencyMapper() {
         load();
     }
 
 
-    public static synchronized CurrencyNameMapper getInstance() {
+    public static synchronized CurrencyMapper getInstance() {
         if (mInstance == null) {
-            mInstance = new CurrencyNameMapper();
+            mInstance = new CurrencyMapper();
         }
         return mInstance;
     }
 
     Map<String, Currency> mMap = new ConcurrentHashMap<>(100);
+    List<Currency> mList = new LinkedList<>();
 
-    public LinkedList<Currency> getAll() {
-        return new LinkedList<>(mMap.values());
+    /**
+     * get full list of currencies
+     * @return
+     */
+    public List<Currency> getCurrencyList() {
+        return mList;
     }
 
     public Currency getCurrency(String alphabeticCode) {
@@ -54,20 +61,41 @@ public class CurrencyNameMapper {
 
         String jsonData = readFile("currency_table.txt");
 
-        LinkedList<Currency> list = null;
         if (!TextUtils.isEmpty(jsonData)) {
             Gson gson = new Gson();
-            list = gson.fromJson(jsonData, new TypeToken<LinkedList<Currency>>() {
+            mList = gson.fromJson(jsonData, new TypeToken<LinkedList<Currency>>() {
             }.getType());
 
             mMap.clear();
-            if (list != null) {
-                for (Currency currency: list) {
-                    mMap.put(currency.alphabeticCode, currency);
-                    Log.d(TAG, currency.toString());
+            if (mList != null) {
+                for (Currency currency: mList) {
+                    if (!currency.alphabeticCode.startsWith("X")) {  //currency code starting with 'X' --> IGNORED
+                        mMap.put(currency.alphabeticCode, currency);
+                    }
+                    DLog.d(TAG, currency.toString());
                 }
             }
+
+            Collections.sort(mList);
         }
+    }
+
+    /**
+     * locate the position in the currency list for the given currency.
+     * @param currency
+     * @return return index if found, else return -1
+     */
+    public int find(Currency currency) {
+
+        if (currency == null) return -1;
+
+        for (int i = 0; i < mList.size(); i++) {
+            if (mList.get(i).alphabeticCode.equals(currency.alphabeticCode)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     private String readFile(String fileName) {
@@ -86,31 +114,12 @@ public class CurrencyNameMapper {
             content = sb.toString();
 
         } catch (IOException e) {
-            Log.e(TAG, e.toString());
+            DLog.e(TAG, e.toString());
             e.printStackTrace();
             return null;
         }
 
         return content;
-    }
-
-
-    public class Currency {
-        public String alphabeticCode;     // ISO alphabeticCode
-        public String numericCode;        // ISO number code
-        public String enName;             // English Name
-        public String cnName;             // Chinese Name
-        public Bitmap bitmap;             // national flag icon
-
-        @Override
-        public String toString() {
-            return "Currency{" +
-                    "alphabeticCode='" + alphabeticCode + '\'' +
-                    ", numericCode='" + numericCode + '\'' +
-                    ", enName='" + enName + '\'' +
-                    ", cnName='" + cnName + '\'' +
-                    '}';
-        }
     }
 
 }

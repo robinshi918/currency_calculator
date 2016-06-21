@@ -4,30 +4,30 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.robinshi.CCApplication;
+import org.robinshi.util.DLog;
 
 /**
  * Created by shiyun on 16/6/2.
  */
-public class CacheManager {
-    private static final String TAG = CacheManager.class.getSimpleName();
+public class Cache {
+    private static final String TAG = Cache.class.getSimpleName();
 
     public static String KEY_CURRENCY_LIST = "currency_list";
 
-    private static CacheManager mInstance;
+    private static Cache mInstance;
     private SharedPreferences mFile;
 
-    private CacheManager() {
+    private Cache() {
         mFile = CCApplication.getAppInstance().getSharedPreferences("cache_file", Context.MODE_PRIVATE);
     }
 
-    public static synchronized CacheManager getInstance() {
+    public static synchronized Cache getInstance() {
         if (mInstance == null) {
-            mInstance = new CacheManager();
+            mInstance = new Cache();
         }
         return mInstance;
     }
@@ -46,7 +46,7 @@ public class CacheManager {
             try {
                 return new JSONObject(text);
             } catch (JSONException e) {
-                Log.e(TAG, "getJSONObject failed: parse error!");
+                DLog.e(TAG, "getJSONObject failed: parse error!");
                 return null;
             }
         } else {

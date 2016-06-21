@@ -3,9 +3,9 @@ package org.robinshi.engine;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.robinshi.CCApplication;
+import org.robinshi.util.DLog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * maintain image cache
+ * maintain national flag icon image cache
  */
 public class ImageManager {
 
@@ -33,7 +33,13 @@ public class ImageManager {
         return mInstance;
     }
 
+    /**
+     * read the flag icon file according to given
+     * @param code currency ISO code
+     * @return
+     */
     public Bitmap getBitmap(String code) {
+
         Bitmap bitmap = null;
 
         if (TextUtils.isEmpty(code)) {
@@ -50,7 +56,7 @@ public class ImageManager {
                 mCache.put(code, bitmap);
                 in.close();
             } catch (IOException e) {
-                Log.e(TAG, e.toString());
+                DLog.e(TAG, e.toString());
             }
         }
 

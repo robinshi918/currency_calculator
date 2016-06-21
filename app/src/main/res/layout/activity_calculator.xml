@@ -38,14 +38,14 @@
         android:layout_height="@dimen/text_height">
         <EditText
             android:id="@+id/lower_currency_value"
-            android:layout_width="280dp"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
             android:text="0.0"
             android:gravity="center"
             android:textSize="@dimen/currency_text_size"/>
         <Spinner
-            android:layout_width="80dp"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="@dimen/currency_left_margin"
