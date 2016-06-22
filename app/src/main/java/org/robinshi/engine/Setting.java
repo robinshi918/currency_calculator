@@ -11,8 +11,8 @@ import org.robinshi.CCApplication;
 public class Setting {
 
     private static final String TAG = Cache.class.getSimpleName();
-    public static String UPPER_CURRENCY_CODE;
-    public static String LOWER_CURRENCY_CODE;
+    public static String UPPER_CURRENCY_CODE = "upper_currency_code";
+    public static String LOWER_CURRENCY_CODE = "lower_currency_code";
 
 
     private static Setting mInstance;

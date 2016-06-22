@@ -1,7 +1,7 @@
 package org.robinshi.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,16 +14,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import org.robinshi.engine.Setting;
-import org.robinshi.util.DLog;
+import org.robinshi.R;
 import org.robinshi.engine.Currency;
 import org.robinshi.engine.CurrencyMapper;
-import org.robinshi.ui.widget.CurrencyListAdapter;
-import org.robinshi.R;
+import org.robinshi.engine.Setting;
 import org.robinshi.engine.baidu.BaiDuApi;
-import org.robinshi.engine.baidu.domain.ConvertResult;
 import org.robinshi.engine.baidu.ResultListener;
+import org.robinshi.engine.baidu.domain.ConvertResult;
+import org.robinshi.ui.widget.CurrencyListAdapter;
+import org.robinshi.util.DLog;
 
 import java.util.Collection;
 import java.util.List;
@@ -92,6 +91,7 @@ public class CalculatorActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Currency currency = upperAdapter.getItem(position);
             Setting.getInstance().setString(Setting.UPPER_CURRENCY_CODE, currency.alphabeticCode);
+            DLog.d(TAG, "user selected[upper] " + currency.alphabeticCode);
 
         }
 
@@ -106,6 +106,7 @@ public class CalculatorActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Currency currency = lowerAdapter.getItem(position);
             Setting.getInstance().setString(Setting.LOWER_CURRENCY_CODE, currency.alphabeticCode);
+            DLog.d(TAG, "user selected[lower] " + currency.alphabeticCode);
         }
 
         @Override
@@ -179,36 +180,19 @@ public class CalculatorActivity extends AppCompatActivity {
             int pos = CurrencyMapper.getInstance().find(currency);
             if (pos != -1) {
                 upperSpinner.setSelection(pos);
+                upperCurrency = currency.alphabeticCode;
             }
         }
 
         String lowerSelection = Setting.getInstance().getString(Setting.LOWER_CURRENCY_CODE);
         if (!TextUtils.isEmpty(lowerSelection)) {
-            Currency currency = CurrencyMapper.getInstance().getCurrency(upperSelection);
+            Currency currency = CurrencyMapper.getInstance().getCurrency(lowerSelection);
             int pos = CurrencyMapper.getInstance().find(currency);
             if (pos != -1) {
                 lowerSpinner.setSelection(pos);
+                lowerCurrency = currency.alphabeticCode;
             }
         }
-
-    }
-
-
-    private void getList() {
-        BaiDuApi.getInstance().getCurrencyList(new ResultListener<List<String>>() {
-            @Override
-            public void onResponse(final List<String> result) {
-
-                currencyList = result;
-
-//                setDefaultCurrency();
-            }
-
-            @Override
-            public void onError(final Exception e) {
-                Toast.makeText(CalculatorActivity.this, "failed to get currency list!" + e.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
