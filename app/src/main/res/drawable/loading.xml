@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:duration="100">
+        <layer-list>
+            <item android:drawable="@drawable/aud"/>
+        </layer-list>
+    </item>
+    <item android:duration="100">
+        <layer-list>
+            <item android:drawable="@drawable/cny"/>
+        </layer-list>
+    </item>
+    <item android:duration="100">
+        <layer-list>
+            <item android:drawable="@drawable/eur"/>
+        </layer-list>
+    </item>
+    <item android:duration="100">
+        <layer-list>
+            <item android:drawable="@drawable/jpy"/>
+        </layer-list>
+    </item>
+    <item android:duration="100">
+        <layer-list>
+            <item android:drawable="@drawable/nzd"/>
+        </layer-list>
+    </item>
+    <item android:duration="100">
+        <layer-list>
+            <item android:drawable="@drawable/usd"/>
+        </layer-list>
+    </item>
+
+</animation-list>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by shiyun on 16/5/28.
@@ -26,9 +27,28 @@ public class ConvertRetData implements Serializable{
     public float convertedamount;
     public float amount;
 
-    public Date getDateObject() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public String getLocaleDateString() {
+
+        /**
+         * parse a date time string, supposing it is UTC(GMT+0).
+         */
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+            Date dateObj =  sdf.parse(this.date + " " + this.time);
+            sdf.setTimeZone(TimeZone.getDefault());
+            return sdf.format(dateObj);
+        } catch (ParseException e) {
+            return "";
+        }
+    }
+
+    public Date getDateObject() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
             return sdf.parse(date + " " + time);
         } catch (ParseException e) {
             return null;

@@ -1,5 +1,6 @@
 package org.robinshi.ui.activity;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -25,12 +26,13 @@ import org.robinshi.ui.widget.CurrencyListAdapter;
 import org.robinshi.util.DLog;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Locale;
 
 public class CalculatorActivity extends AppCompatActivity {
 
     private static final String TAG = CalculatorActivity.class.getSimpleName();
 
+    // widgets
     private Button swapButton;
     private EditText upperEdit;
     private EditText lowerEdit;
@@ -38,11 +40,17 @@ public class CalculatorActivity extends AppCompatActivity {
     private Spinner lowerSpinner;
     private TextView hintTextView;
 
+    // spinner adapter
     private ArrayAdapter<Currency> upperAdapter;
     private ArrayAdapter<Currency> lowerAdapter;
 
-    private List<String> currencyList;
+    // indicate which edit widget has the focus
+    private boolean isUpperEditFocused = true;
 
+    private View loadingView;
+    private AnimationDrawable loadingAnimation;
+
+    //listeners
     View.OnClickListener swapButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -84,7 +92,7 @@ public class CalculatorActivity extends AppCompatActivity {
     };
 
     /**
-     * when user selects an item in spinner, save the user selection
+     * when user selects an item in spinner, save user selection
      */
     private AdapterView.OnItemSelectedListener mUpperSpinnerSelectionListener = new AdapterView.OnItemSelectedListener() {
         @Override
@@ -92,16 +100,13 @@ public class CalculatorActivity extends AppCompatActivity {
             Currency currency = upperAdapter.getItem(position);
             Setting.getInstance().setString(Setting.UPPER_CURRENCY_CODE, currency.alphabeticCode);
             DLog.d(TAG, "user selected[upper] " + currency.alphabeticCode);
-
         }
 
         @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
+        public void onNothingSelected(AdapterView<?> parent) {}
     };
 
-    private AdapterView.OnItemSelectedListener mlowerSpinnerSelectionListener = new AdapterView.OnItemSelectedListener() {
+    private AdapterView.OnItemSelectedListener mLowerSpinnerSelectionListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Currency currency = lowerAdapter.getItem(position);
@@ -115,45 +120,17 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     };
 
-    private void convert() {
 
-        String from, to;
-        float amount;
-        if (isUpperEditFocused) {
-            from = ((Currency) upperSpinner.getSelectedItem()).alphabeticCode;
-            to = ((Currency) lowerSpinner.getSelectedItem()).alphabeticCode;
-            amount = Float.parseFloat(upperEdit.getText().toString());
-        } else {
-            from = ((Currency)lowerSpinner.getSelectedItem()).alphabeticCode;
-            to = ((Currency) upperSpinner.getSelectedItem()).alphabeticCode;
-            amount = Float.parseFloat(lowerEdit.getText().toString());
-        }
-
-        DLog.d(TAG, String.format("converting:  %s->%s (%f) ", from, to, amount));
-
-        BaiDuApi.getInstance().convert(amount, from, to, new ResultListener<ConvertResult>() {
-            @Override
-            public void onResponse(final ConvertResult result) {
-
-                if (result != null) {
-                    String value = String.format("%.4f", result.getRetData().getConvertedamount());
-
-                    if (isUpperEditFocused) {
-                        lowerEdit.setText(value);
-                    } else {
-                        upperEdit.setText(value);
-                    }
-
-                    hintTextView.setText(result.getRetData().getDate() + " " + result.getRetData().getTime());
-                }
-            }
-
-            @Override
-            public void onError(Exception e) {
-                Toast.makeText(CalculatorActivity.this, "", Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calculator);
+        findViews();
+        initListeners();
+        initData();
+        initCurrencySpinner();
     }
+
 
     private void initCurrencySpinner() {
         upperAdapter = new CurrencyListAdapter(this, this, R.layout.spinner_dropdown_item);
@@ -167,7 +144,7 @@ public class CalculatorActivity extends AppCompatActivity {
         lowerAdapter.addAll(CurrencyMapper.getInstance().getCurrencyList());
         lowerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         lowerSpinner.setAdapter(lowerAdapter);
-        lowerSpinner.setOnItemSelectedListener(mlowerSpinnerSelectionListener);
+        lowerSpinner.setOnItemSelectedListener(mLowerSpinnerSelectionListener);
 
         initUserSelection();
     }
@@ -180,7 +157,6 @@ public class CalculatorActivity extends AppCompatActivity {
             int pos = CurrencyMapper.getInstance().find(currency);
             if (pos != -1) {
                 upperSpinner.setSelection(pos);
-                upperCurrency = currency.alphabeticCode;
             }
         }
 
@@ -190,24 +166,11 @@ public class CalculatorActivity extends AppCompatActivity {
             int pos = CurrencyMapper.getInstance().find(currency);
             if (pos != -1) {
                 lowerSpinner.setSelection(pos);
-                lowerCurrency = currency.alphabeticCode;
             }
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calculator);
-        findViews();
-        initListeners();
-        initData();
-        initCurrencySpinner();
-    }
 
-    private float exchangeRate = 0.0f;
-    private String upperCurrency = "CNY";
-    private String lowerCurrency = "USD";
 
     private void initData() {
         //getList();
@@ -242,26 +205,6 @@ public class CalculatorActivity extends AppCompatActivity {
 
         lowerEdit.addTextChangedListener(lowerEditChangeListener);
 
-        upperSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                upperCurrency = upperAdapter.getItem(position).alphabeticCode;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        lowerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                lowerCurrency = lowerAdapter.getItem(position).alphabeticCode;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
         upperEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -281,36 +224,69 @@ public class CalculatorActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isUpperEditFocused = true;
-
     private void findViews() {
-        //init widgets
         swapButton = (Button) findViewById(R.id.button_exchange);
         upperEdit = (EditText) findViewById(R.id.upper_currency_value);
         lowerEdit = (EditText) findViewById(R.id.lower_currency_value);
         upperSpinner = (Spinner) findViewById(R.id.upper_spinner);
         lowerSpinner = (Spinner) findViewById(R.id.lower_spinner);
         hintTextView = (TextView) findViewById(R.id.tipText);
+        loadingView = (View) findViewById(R.id.loading_view);
     }
 
-    /**
-     * set default currencies
-     */
-    private void setDefaultCurrency() {
+    private void convert() {
 
-        upperCurrency = "CNY";
-        lowerCurrency = "USD";
-
-        int upperPos = currencyList.indexOf(upperCurrency);
-        if (upperPos != -1) {
-            upperSpinner.setSelection(upperPos);
+        String from, to;
+        float amount;
+        if (isUpperEditFocused) {
+            from = ((Currency) upperSpinner.getSelectedItem()).alphabeticCode;
+            to = ((Currency) lowerSpinner.getSelectedItem()).alphabeticCode;
+            amount = Float.parseFloat(upperEdit.getText().toString());
+        } else {
+            from = ((Currency)lowerSpinner.getSelectedItem()).alphabeticCode;
+            to = ((Currency) upperSpinner.getSelectedItem()).alphabeticCode;
+            amount = Float.parseFloat(lowerEdit.getText().toString());
         }
 
-        int lowerPos = currencyList.indexOf(lowerCurrency);
-        if (lowerPos != -1) {
-            lowerSpinner.setSelection(lowerPos);
+        DLog.d(TAG, String.format(Locale.ENGLISH, "converting:  %s->%s (%f) ", from, to, amount));
+
+        showLoading();
+        BaiDuApi.getInstance().convert(amount, from, to, new ResultListener<ConvertResult>() {
+            @Override
+            public void onResponse(final ConvertResult result) {
+                stopLoading();
+                if (result != null) {
+                    String value = String.format("%.4f", result.getRetData().getConvertedamount());
+
+                    if (isUpperEditFocused) {
+                        lowerEdit.setText(value);
+                    } else {
+                        upperEdit.setText(value);
+                    }
+                    hintTextView.setText(result.getRetData().getLocaleDateString());
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(CalculatorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                stopLoading();
+            }
+        });
+    }
+
+    private void showLoading() {
+        if (loadingView != null) {
+            loadingAnimation = (AnimationDrawable)loadingView.getBackground();
+            loadingAnimation.start();
+            loadingView.setVisibility(View.VISIBLE);
         }
+    }
 
-
+    private void stopLoading() {
+        if (loadingView != null) {
+            loadingView.setVisibility(View.GONE);
+            loadingAnimation.stop();
+        }
     }
 }

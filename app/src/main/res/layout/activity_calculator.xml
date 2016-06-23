@@ -60,6 +60,14 @@
         android:gravity="center"
         android:text="2016-06-01 20:12:34"/>
 
+    <View
+        android:id="@+id/loading_view"
+        android:layout_width="135.0dip"
+        android:layout_height="135.0dip"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/loading"/>
+
 
 
 
