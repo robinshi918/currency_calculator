@@ -31,13 +31,14 @@
         android:id="@+id/button_exchange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_height"
-        android:text="CONVERT"/>
+        android:text="EXCHANGE"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_height">
         <EditText
             android:id="@+id/lower_currency_value"
+            android:layout_alignParentLeft="true"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
@@ -48,6 +49,7 @@
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
+            android:layout_toLeftOf="@+id/lower_currency_value"
             android:layout_marginLeft="@dimen/currency_left_margin"
             android:id="@+id/lower_spinner"/>
             />
@@ -62,14 +64,10 @@
 
     <View
         android:id="@+id/loading_view"
-        android:layout_width="135.0dip"
-        android:layout_height="135.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
         android:background="@drawable/loading"/>
-
-
-
-
 
 </LinearLayout>

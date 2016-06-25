@@ -36,7 +36,4 @@ public class Setting {
         return mFile.getString(key, "");
     }
 
-
-
-
 }

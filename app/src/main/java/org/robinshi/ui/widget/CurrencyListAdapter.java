@@ -17,7 +17,7 @@ import org.robinshi.ui.activity.CalculatorActivity;
 import java.util.List;
 
 /**
- * Created by shiyun on 16/6/7.
+ * List Adapter for currency list spinner.
  */
 public class CurrencyListAdapter extends ArrayAdapter<Currency> {
 

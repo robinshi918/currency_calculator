@@ -256,7 +256,7 @@ public class CalculatorActivity extends AppCompatActivity {
             public void onResponse(final ConvertResult result) {
                 stopLoading();
                 if (result != null) {
-                    String value = String.format("%.4f", result.getRetData().getConvertedamount());
+                    String value = String.format(Locale.ENGLISH, "%.4f", result.getRetData().getConvertedamount());
 
                     if (isUpperEditFocused) {
                         lowerEdit.setText(value);

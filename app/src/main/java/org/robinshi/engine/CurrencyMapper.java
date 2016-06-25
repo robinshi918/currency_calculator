@@ -81,7 +81,7 @@ public class CurrencyMapper {
     }
 
     /**
-     * locate the position in the currency list for the given currency.
+     * locate the given currency in the currency list.
      * @param currency
      * @return return index if found, else return -1
      */
